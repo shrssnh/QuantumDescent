@@ -1,161 +1,153 @@
+#!/usr/bin/env python3
+import argparse
 import numpy as np
+from pathlib import Path
 from ase import Atoms
+from ase.data import atomic_numbers, chemical_symbols
 from ase.neighborlist import neighbor_list
-from ase.data import atomic_numbers
+
+# ─── Hyperparameters ────────────────────────────────────────────────────────────
+CUT_OFF    = 6.0
+WIDTH      = 0.5
+ALPHA      = 2           # 0=x,1=y,2=z
+DIM        = 8
+STRATEGY   = 'weighted'  # or 'augmented'
+WEIGHTTYPE = 'electronegativity'
 
 pauling_en = {
-    1: 2.20,   2: 0.0,   3: 0.98,  4: 1.57,  5: 2.04,  6: 2.55,  7: 3.04,
-    8: 3.44,   9: 3.98, 10: 0.0,  11: 0.93, 12: 1.31, 13: 1.61, 14: 1.90,
-   15: 2.19,  16: 2.58, 17: 3.16, 18: 0.0,  19: 0.82, 20: 1.00,
+    1: 2.20, 6: 2.55, 7: 3.04, 8: 3.44,
+    # Extend as needed
 }
 
-
 def cutoff_function(r, rc):
-    """
-    Smooth cutoff: 
-      0.5 * (cos(pi * r / rc) + 1)   for r < rc,
-      0                            otherwise.
-    """
-    return 0.5 * (np.cos(np.pi * r / rc) + 1.0) * (r < rc)
+    return 0.5 * (np.cos(np.pi * r/rc) + 1.0) * (r < rc)
+
+def load_site_positions(fn: Path, n_sites: int) -> np.ndarray:
+    sp = np.loadtxt(fn)
+    if sp.shape == (3, n_sites):
+        return sp.T
+    if sp.shape == (n_sites, 3):
+        return sp
+    raise ValueError(f"site_positions.dat has unexpected shape {sp.shape}")
+
+def load_displacements(npzfile: Path, key: str) -> np.ndarray:
+    arr = np.load(npzfile)[key]
+    if arr.shape[1] != 3:
+        raise ValueError(f"rc.npz['{key}'] has unexpected shape {arr.shape}")
+    return arr  # shape is (n, 3)
 
 
-class AGNICalculator:
-    def __init__(self,
-                 atoms: Atoms,
-                 cutoff: float,
-                 width: float,
-                 alpha: int,
-                 dim: int,
-                 strategy: str = 'weighted',
-                 weight_type: str = 'atomic_number',
-                 atomtypes: list[str] | None = None):
-        """
-        Parameters
-        ----------
-        atoms
-          ASE Atoms object.
-        cutoff
-          radial cutoff (rc).
-        width
-          Gaussian width (w).
-        alpha
-          index 0,1,2 for which Cartesian component to project onto.
-        dim
-          number of Gaussian centers (dimensionality).
-        strategy
-          'weighted'  or  'augmented'
-        weight_type
-          one of 'atomic_number', 'electronegativity', or anything else→constant=1
-        atomtypes
-          list of element symbols for 'augmented'; if None, inferred from atoms.
-        """
-        self.atoms = atoms
-        self.cutoff = cutoff
-        self.width = width
-        self.alpha = alpha
-        self.dim = dim
-        self.strategy = strategy
-        self.weight_type = weight_type
+def process_subdir(d: Path, outdir: Path):
+    print(d)
+    # ─── Load Base Info ─────────────────────────────────────────────────────────
+    Zs      = np.loadtxt(d/'element.dat', dtype=int)
+    n_sites = len(Zs)
+    symbols = [chemical_symbols[z] for z in Zs]
+    lat     = np.loadtxt(d/'lat.dat')  # 3x3 lattice
+    baseline_pos = load_site_positions(d/'site_positions.dat', n_sites)
 
-        if atomtypes is None:
-            atomtypes = sorted(set(atoms.get_chemical_symbols()))
-        self.atomtypes = atomtypes
-        self.natomtypes = len(atomtypes)
+    # ─── Read displacements ─────────────────────────────────────────────────────
+    rc_archive = np.load(d/'rc.npz')
+    sample_keys = sorted(rc_archive.keys())
+    n_samples = len(sample_keys)
 
-        self.centers = np.linspace(0.0, cutoff, dim)
+    # ─── Determine descriptor size ──────────────────────────────────────────────
+    if STRATEGY == 'weighted':
+        fpsize = 2 * DIM
+        atomtypes = None
+    else:
+        atomtypes = sorted(set(symbols))
+        fpsize = DIM * len(atomtypes)
 
-        if strategy == 'weighted':
-            self.fpsize = 2 * dim
-        elif strategy == 'augmented':
-            self.fpsize = dim * self.natomtypes
-        else:
-            raise ValueError("strategy must be 'weighted' or 'augmented'")
+    X = np.zeros((n_samples, n_sites * fpsize))
+    centers = np.linspace(0.0, CUT_OFF, DIM)
 
-    def calculate(self) -> np.ndarray:
-        """
-        Compute AGNI fingerprint for all atoms.
-        
-        Returns
-        -------
-        desc : array, shape (n_atoms, fpsize)
-          The AGNI descriptor matrix.
-        """
-        n_atoms = len(self.atoms)
-        desc = np.zeros((n_atoms, self.fpsize))
+    for i, key in enumerate(sample_keys):
+        disp = load_displacements(d/'rc.npz', key)  # (3, 3)
 
-        i_list, j_list, distances, vectors = neighbor_list(
-            'ijdD', self.atoms, cutoff=self.cutoff
-        )
+        # These are only displacements for 3 atoms → apply them to baseline
+        coords = np.copy(baseline_pos)
+        affected_atoms = [int(i) - 1 for i in key.strip("[]").split(",")[3:]]
+        # print(affected_atoms)
+        # Check for out-of-bound indices
+        if any(i == baseline_pos.shape[0] for i in affected_atoms):
+            print(f"⚠️  Skipping key {key} due to invalid atom indices: {affected_atoms}")
 
-        for idx in range(n_atoms):
+        disp = load_displacements(d/'rc.npz', key)
+        disp = disp[:len(affected_atoms)]
+
+        coords = np.copy(baseline_pos)
+        coords[affected_atoms] += disp
+
+
+        atoms = Atoms(symbols=symbols, positions=coords, cell=lat, pbc=True)
+        i_list, j_list, dists, vecs = neighbor_list('ijdD', atoms, cutoff=CUT_OFF)
+
+        desc = np.zeros((n_sites, fpsize))
+        for idx in range(n_sites):
             mask = (i_list == idx)
-            neigh_js = j_list[mask]
-            r_ijs = distances[mask]
-            vecs = vectors[mask]
-            r_alphas = vecs[:, self.alpha]
-            fc = cutoff_function(r_ijs, self.cutoff)
+            neighs = j_list[mask]
+            R = dists[mask]
+            V = vecs[mask]
+            R_alpha = V[:, ALPHA]
+            fc = cutoff_function(R, CUT_OFF)
 
-            pos = 0
-            if self.strategy == 'weighted':
-                for wt in [None, self.weight_type]:
-                    for a_k in self.centers:
+            ptr = 0
+            if STRATEGY == 'weighted':
+                for wt in (None, WEIGHTTYPE):
+                    for a_k in centers:
                         val = 0.0
-                        for j, R, R_alpha, f_c in zip(neigh_js, r_ijs, r_alphas, fc):
+                        for j, r, ra, f_c in zip(neighs, R, R_alpha, fc):
                             if wt == 'atomic_number':
-                                weight = atomic_numbers[self.atoms[j].symbol]
+                                weight = atomic_numbers[atoms[j].symbol]
                             elif wt == 'electronegativity':
-                                Z = atomic_numbers[self.atoms[j].symbol]
+                                Z = atomic_numbers[atoms[j].symbol]
                                 weight = pauling_en.get(Z, 1.0)
                             else:
                                 weight = 1.0
                             term = (
-                                (R_alpha / R)
-                                * (1.0 / (np.sqrt(2*np.pi) * self.width))
-                                * np.exp(-0.5 * ((R - a_k) / self.width)**2)
+                                (ra/r)
+                                * (1.0/(np.sqrt(2*np.pi)*WIDTH))
+                                * np.exp(-0.5*((r-a_k)/WIDTH)**2)
                                 * f_c
                             )
                             val += weight * term
-                        desc[idx, pos] = val
-                        pos += 1
+                        desc[idx, ptr] = val
+                        ptr += 1
+            else:  # augmented
+                for atype in atomtypes:
+                    sel = [atoms[j].symbol == atype for j in neighs]
+                    R_t = R[sel]
+                    Ra_t = R_alpha[sel]
+                    fc_t = fc[sel]
+                    for a_k in centers:
+                        val = np.sum(
+                            (Ra_t/R_t)
+                            * (1.0/(np.sqrt(2*np.pi)*WIDTH))
+                            * np.exp(-0.5*((R_t-a_k)/WIDTH)**2)
+                            * fc_t
+                        )
+                        desc[idx, ptr] = val
+                        ptr += 1
 
-            else:
-                for atype in self.atomtypes:
-                    mask_type = [self.atoms[j].symbol == atype for j in neigh_js]
-                    r_t  = r_ijs[mask_type]
-                    ra_t = r_alphas[mask_type]
-                    fc_t = fc[mask_type]
-                    js_t = [j for j,m in zip(neigh_js, mask_type) if m]
+        X[i, :] = desc.ravel()
 
-                    for a_k in self.centers:
-                        val = 0.0
-                        for j, R, R_alpha, f_c in zip(js_t, r_t, ra_t, fc_t):
-                            term = (
-                                (R_alpha / R)
-                                * (1.0 / (np.sqrt(2*np.pi) * self.width))
-                                * np.exp(-0.5 * ((R - a_k) / self.width)**2)
-                                * f_c
-                            )
-                            val += term
-                        desc[idx, pos] = val
-                        pos += 1
+    outfile = outdir / f"{d.name}_agni.npz"
+    np.savez(outfile,
+             fingerprints=X,
+             sample_keys=sample_keys)
+    print(f"  • {d.name}: {X.shape} → {outfile}")
 
-        return desc
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("root",  type=Path, help="root of graphene_dataset")
+    p.add_argument("--out", type=Path, default=Path("agni_out"))
+    args = p.parse_args()
 
+    args.out.mkdir(exist_ok=True, parents=True)
+    for sub in sorted(args.root.iterdir()):
+        if sub.is_dir() and (sub/"element.dat").exists():
+            process_subdir(sub, args.out)
 
-from ase.build import molecule
-
-atoms = molecule('H2O')
-
-calc = AGNICalculator(
-    atoms,
-    cutoff=6.0,
-    width=0.5,
-    alpha=2,
-    dim=8,
-    strategy='weighted',
-    weight_type='electronegativity'
-)
-
-features = calc.calculate()
-print("AGNI features shape:", features.shape)
-print(features)
+if __name__ == "__main__":
+    main()
