@@ -152,7 +152,7 @@ calc = AGNICalculator(
     width=0.5,
     alpha=2,
     dim=8,
-    strategy='weighted',       # or 'augmented'
+    strategy='weighted',
     weight_type='electronegativity'
 )
 
