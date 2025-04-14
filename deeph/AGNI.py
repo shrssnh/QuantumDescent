@@ -5,6 +5,9 @@ from pathlib import Path
 from ase import Atoms
 from ase.data import atomic_numbers, chemical_symbols
 from ase.neighborlist import neighbor_list
+from concurrent.futures import ProcessPoolExecutor
+import multiprocessing
+
 
 # ─── Hyperparameters ────────────────────────────────────────────────────────────
 CUT_OFF    = 6.0
@@ -142,12 +145,20 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("root",  type=Path, help="root of graphene_dataset")
     p.add_argument("--out", type=Path, default=Path("agni_out"))
+    p.add_argument("-j", "--jobs", type=int, default=multiprocessing.cpu_count(),
+                   help="Number of processes to use (default: all CPUs)")
     args = p.parse_args()
 
     args.out.mkdir(exist_ok=True, parents=True)
-    for sub in sorted(args.root.iterdir()):
-        if sub.is_dir() and (sub/"element.dat").exists():
-            process_subdir(sub, args.out)
+    all_subdirs = [sub for sub in sorted(args.root.iterdir())
+                   if sub.is_dir() and (sub/"element.dat").exists()]
+
+    from concurrent.futures import ProcessPoolExecutor
+    with ProcessPoolExecutor(max_workers=args.jobs) as executor:
+        futures = [executor.submit(process_subdir, sub, args.out) for sub in all_subdirs]
+        for f in futures:
+            f.result()
+
 
 if __name__ == "__main__":
     main()
