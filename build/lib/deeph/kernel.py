@@ -93,7 +93,6 @@ class DeepHKernel:
             print('')
         config.write(open(os.path.join(config.get('basic', 'save_dir'), 'config.ini'), "w"))
 
-        self.if_agni = self.config.getboolean('network', 'if_agni', fallback=True)
         self.if_lcmp = self.config.getboolean('network', 'if_lcmp', fallback=True)
         self.if_lcmp_graph = self.config.getboolean('graph', 'if_lcmp_graph', fallback=True)
         self.new_sp = self.config.getboolean('graph', 'new_sp', fallback=False)
@@ -173,6 +172,7 @@ class DeepHKernel:
             if_exp=self.config.getboolean('network', 'if_exp'),
             if_MultipleLinear=self.config.getboolean('network', 'if_MultipleLinear'),
             if_edge_update=self.config.getboolean('network', 'if_edge_update'),
+            if_agni=self.config.getboolean('network', 'if_agni'),
             if_lcmp=self.if_lcmp,
             normalization=self.config.get('network', 'normalization'),
             atom_update_net=self.config.get('network', 'atom_update_net', fallback='CGConv'),
@@ -656,32 +656,16 @@ class DeepHKernel:
             if self.if_lcmp:
                 batch, subgraph = batch_tuple
                 sub_atom_idx, sub_edge_idx, sub_edge_ang, sub_index = subgraph
-                if not self.if_agni:
-                    output = self.model(
-                        batch.x.to(self.device),
-                        batch.edge_index.to(self.device),
-                        batch.edge_attr.to(self.device),
-                        batch.batch.to(self.device),
-                        sub_atom_idx.to(self.device),
-                        sub_edge_idx.to(self.device),
-                        sub_edge_ang.to(self.device),
-                        sub_index.to(self.device),
-                    )
-                if self.if_agni:
-                    agni_raw = batch.agni.to(self.device)
-                    fpsize  = 16
-                    agni = agni_raw.view(-1, fpsize)
-                    output = self.model(
-                        batch.x.to(self.device),
-                        batch.edge_index.to(self.device),
-                        batch.edge_attr.to(self.device),
-                        batch.batch.to(self.device),
-                        sub_atom_idx.to(self.device),
-                        sub_edge_idx.to(self.device),
-                        sub_edge_ang.to(self.device),
-                        sub_index.to(self.device),
-                        agni=agni,
-                    )
+                output = self.model(
+                    batch.x.to(self.device),
+                    batch.edge_index.to(self.device),
+                    batch.edge_attr.to(self.device),
+                    batch.batch.to(self.device),
+                    sub_atom_idx.to(self.device),
+                    sub_edge_idx.to(self.device),
+                    sub_edge_ang.to(self.device),
+                    sub_index.to(self.device)
+                )
             else:
                 batch = batch_tuple
                 output = self.model(

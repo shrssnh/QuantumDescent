@@ -5,6 +5,7 @@ deeph/__init__.py
 deeph/data.py
 deeph/default.ini
 deeph/graph.py
+deeph/graphene.ini
 deeph/kernel.py
 deeph/model.py
 deeph/rotate.py

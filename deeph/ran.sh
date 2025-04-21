@@ -3,4 +3,4 @@
 cd ..
 pip install .
 cd deeph
-deeph-train --config ./default.ini
+deeph-train --config ./graphene.ini

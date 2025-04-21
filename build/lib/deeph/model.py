@@ -538,13 +538,15 @@ class MultipleLinear(nn.Module):
 
 class HGNN(nn.Module):
     def __init__(self, num_species, in_atom_fea_len, in_edge_fea_len, num_orbital,
-                 distance_expansion, gauss_stop, if_exp, if_MultipleLinear, if_edge_update, if_lcmp,
+                 distance_expansion, gauss_stop, if_exp, if_MultipleLinear, if_edge_update, if_agni, if_lcmp,
                  normalization, atom_update_net, separate_onsite,
                  trainable_gaussians, type_affine, num_l=5):
         super(HGNN, self).__init__()
         self.num_species = num_species
         self.embed = nn.Embedding(num_species + 5, in_atom_fea_len)
-        self.agni_lin = nn.Linear(8, in_atom_fea_len)
+        self.if_agni = if_agni
+        if self.if_agni:
+            self.agni_lin = nn.Linear(16, in_atom_fea_len)
 
         # pair-type aware affine
         if type_affine:
@@ -624,8 +626,9 @@ class HGNN(nn.Module):
                 huge_structure=False, output_final_layer_neuron='', agni=None):
         batch_edge = batch[edge_idx[0]]
         atom_fea0 = self.embed(atom_attr)
-        agni_emb = self.agni_lin(agni)
-        atom_fea0 = atom_fea0 * agni_emb
+        if self.if_agni:
+            agni_emb = self.agni_lin(agni)
+            atom_fea0 = atom_fea0 * agni_emb
         distance = edge_attr[:, 0]
         edge_vec = edge_attr[:, 1:4] - edge_attr[:, 4:7]
         if self.type_affine is None:

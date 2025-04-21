@@ -1,0 +1,119 @@
+====== CONFIG ======
+[basic]
+graph_dir=training/
+save_dir=results/2025-04-22_00-23-44
+raw_dir=../../graphene_dataset/processed/
+dataset_name=graphene
+only_get_graph=False
+interface=npz
+target=hamiltonian
+disable_cuda=False
+device=cuda:0
+num_threads=-1
+save_to_time_folder=True
+save_csv=False
+tb_writer=True
+seed=42
+multiprocessing=0
+orbital=[{"6 6": [0, 0]}, {"6 6": [0, 1]}, {"6 6": [0, 2]}, {"6 6": [0, 3]}, {"6 6": [0, 4]}, {"6 6": [0, 5]}, {"6 6": [0, 6]}, {"6 6": [0, 7]}, {"6 6": [0, 8]}, {"6 6": [0, 9]}, {"6 6": [0, 10]}, {"6 6": [0, 11]}, {"6 6": [0, 12]}, {"6 6": [1, 0]}, {"6 6": [1, 1]}, {"6 6": [1, 2]}, {"6 6": [1, 3]}, {"6 6": [1, 4]}, {"6 6": [1, 5]}, {"6 6": [1, 6]}, {"6 6": [1, 7]}, {"6 6": [1, 8]}, {"6 6": [1, 9]}, {"6 6": [1, 10]}, {"6 6": [1, 11]}, {"6 6": [1, 12]}, {"6 6": [2, 0]}, {"6 6": [2, 1]}, {"6 6": [2, 2]}, {"6 6": [2, 3]}, {"6 6": [2, 4]}, {"6 6": [2, 5]}, {"6 6": [2, 6]}, {"6 6": [2, 7]}, {"6 6": [2, 8]}, {"6 6": [2, 9]}, {"6 6": [2, 10]}, {"6 6": [2, 11]}, {"6 6": [2, 12]}, {"6 6": [3, 0]}, {"6 6": [3, 1]}, {"6 6": [3, 2]}, {"6 6": [3, 3]}, {"6 6": [3, 4]}, {"6 6": [3, 5]}, {"6 6": [3, 6]}, {"6 6": [3, 7]}, {"6 6": [3, 8]}, {"6 6": [3, 9]}, {"6 6": [3, 10]}, {"6 6": [3, 11]}, {"6 6": [3, 12]}, {"6 6": [4, 0]}, {"6 6": [4, 1]}, {"6 6": [4, 2]}, {"6 6": [4, 3]}, {"6 6": [4, 4]}, {"6 6": [4, 5]}, {"6 6": [4, 6]}, {"6 6": [4, 7]}, {"6 6": [4, 8]}, {"6 6": [4, 9]}, {"6 6": [4, 10]}, {"6 6": [4, 11]}, {"6 6": [4, 12]}, {"6 6": [5, 0]}, {"6 6": [5, 1]}, {"6 6": [5, 2]}, {"6 6": [5, 3]}, {"6 6": [5, 4]}, {"6 6": [5, 5]}, {"6 6": [5, 6]}, {"6 6": [5, 7]}, {"6 6": [5, 8]}, {"6 6": [5, 9]}, {"6 6": [5, 10]}, {"6 6": [5, 11]}, {"6 6": [5, 12]}, {"6 6": [6, 0]}, {"6 6": [6, 1]}, {"6 6": [6, 2]}, {"6 6": [6, 3]}, {"6 6": [6, 4]}, {"6 6": [6, 5]}, {"6 6": [6, 6]}, {"6 6": [6, 7]}, {"6 6": [6, 8]}, {"6 6": [6, 9]}, {"6 6": [6, 10]}, {"6 6": [6, 11]}, {"6 6": [6, 12]}, {"6 6": [7, 0]}, {"6 6": [7, 1]}, {"6 6": [7, 2]}, {"6 6": [7, 3]}, {"6 6": [7, 4]}, {"6 6": [7, 5]}, {"6 6": [7, 6]}, {"6 6": [7, 7]}, {"6 6": [7, 8]}, {"6 6": [7, 9]}, {"6 6": [7, 10]}, {"6 6": [7, 11]}, {"6 6": [7, 12]}, {"6 6": [8, 0]}, {"6 6": [8, 1]}, {"6 6": [8, 2]}, {"6 6": [8, 3]}, {"6 6": [8, 4]}, {"6 6": [8, 5]}, {"6 6": [8, 6]}, {"6 6": [8, 7]}, {"6 6": [8, 8]}, {"6 6": [8, 9]}, {"6 6": [8, 10]}, {"6 6": [8, 11]}, {"6 6": [8, 12]}, {"6 6": [9, 0]}, {"6 6": [9, 1]}, {"6 6": [9, 2]}, {"6 6": [9, 3]}, {"6 6": [9, 4]}, {"6 6": [9, 5]}, {"6 6": [9, 6]}, {"6 6": [9, 7]}, {"6 6": [9, 8]}, {"6 6": [9, 9]}, {"6 6": [9, 10]}, {"6 6": [9, 11]}, {"6 6": [9, 12]}, {"6 6": [10, 0]}, {"6 6": [10, 1]}, {"6 6": [10, 2]}, {"6 6": [10, 3]}, {"6 6": [10, 4]}, {"6 6": [10, 5]}, {"6 6": [10, 6]}, {"6 6": [10, 7]}, {"6 6": [10, 8]}, {"6 6": [10, 9]}, {"6 6": [10, 10]}, {"6 6": [10, 11]}, {"6 6": [10, 12]}, {"6 6": [11, 0]}, {"6 6": [11, 1]}, {"6 6": [11, 2]}, {"6 6": [11, 3]}, {"6 6": [11, 4]}, {"6 6": [11, 5]}, {"6 6": [11, 6]}, {"6 6": [11, 7]}, {"6 6": [11, 8]}, {"6 6": [11, 9]}, {"6 6": [11, 10]}, {"6 6": [11, 11]}, {"6 6": [11, 12]}, {"6 6": [12, 0]}, {"6 6": [12, 1]}, {"6 6": [12, 2]}, {"6 6": [12, 3]}, {"6 6": [12, 4]}, {"6 6": [12, 5]}, {"6 6": [12, 6]}, {"6 6": [12, 7]}, {"6 6": [12, 8]}, {"6 6": [12, 9]}, {"6 6": [12, 10]}, {"6 6": [12, 11]}, {"6 6": [12, 12]}]
+o_component=H
+energy_component=summation
+max_element=-1
+statistics=False
+normalizer=False
+boxcox=False
+
+[graph]
+radius=6.0
+max_num_nbr=0
+create_from_dft=False
+if_lcmp_graph=True
+separate_onsite=False
+new_sp=False
+
+[train]
+epochs=5000
+pretrained=
+resume=
+train_ratio=0.6
+val_ratio=0.2
+test_ratio=0.2
+early_stopping_loss=0.0
+early_stopping_loss_epoch=[0.000000, 500]
+revert_then_decay=True
+revert_threshold=30
+revert_decay_epoch=[800, 2000, 3000, 4000]
+revert_decay_gamma=[0.4, 0.5, 0.5, 0.4]
+clip_grad=True
+clip_grad_value=4.2
+switch_sgd=False
+switch_sgd_lr=1e-4
+switch_sgd_epoch=-1
+
+[hyperparameter]
+batch_size=4
+dtype=float32
+optimizer=adam
+learning_rate=0.001
+lr_scheduler=ReduceLROnPlateau
+lr_milestones=[]
+momentum=0.9
+weight_decay=0
+criterion=MaskMSELoss
+retain_edge_fea=True
+lambda_eij=0.0
+lambda_ei=0.1
+lambda_etot=0.0
+
+[network]
+atom_fea_len=64
+edge_fea_len=128
+gauss_stop=6.0
+num_l=5
+aggr=add
+distance_expansion=GaussianBasis
+if_exp=True
+if_multiplelinear=True
+if_edge_update=True
+if_agni=False
+if_lcmp=True
+normalization=LayerNorm
+atom_update_net=GAT
+trainable_gaussians=False
+type_affine=False
+
+Graph data file: HGraph-npz-graphene-5l-6.0r0mn.pkl
+Process new data file......
+Found 450 structures, have cost 0 seconds
+Use multiprocessing (nodes = num_processors x num_threads = 1 x 20)
+  0%|          | 0/450 [00:00<?, ?it/s]  0%|          | 1/450 [00:03<27:53,  3.73s/it]  0%|          | 2/450 [00:07<26:41,  3.58s/it]  1%|          | 3/450 [00:10<26:31,  3.56s/it]  1%|          | 4/450 [00:14<26:12,  3.53s/it]  1%|1         | 5/450 [00:17<26:02,  3.51s/it]  1%|1         | 6/450 [00:21<26:21,  3.56s/it]  2%|1         | 7/450 [00:24<26:07,  3.54s/it]  2%|1         | 8/450 [00:28<25:45,  3.50s/it]  2%|2         | 9/450 [00:31<25:53,  3.52s/it]  2%|2         | 10/450 [00:35<25:38,  3.50s/it]  2%|2         | 11/450 [00:38<25:43,  3.52s/it]  3%|2         | 12/450 [00:42<25:26,  3.49s/it]  3%|2         | 13/450 [00:45<25:45,  3.54s/it]  3%|3         | 14/450 [00:49<25:24,  3.50s/it]  3%|3         | 15/450 [00:52<25:06,  3.46s/it]  4%|3         | 16/450 [00:56<25:08,  3.48s/it]  4%|3         | 17/450 [00:59<24:56,  3.46s/it]  4%|4         | 18/450 [01:03<25:04,  3.48s/it]  4%|4         | 19/450 [01:06<24:52,  3.46s/it]  4%|4         | 20/450 [01:09<24:33,  3.43s/it]  5%|4         | 21/450 [01:13<24:33,  3.43s/it]  5%|4         | 22/450 [01:16<24:24,  3.42s/it]  5%|5         | 23/450 [01:20<24:14,  3.41s/it]  5%|5         | 24/450 [01:23<24:22,  3.43s/it]  6%|5         | 25/450 [01:27<24:13,  3.42s/it]  6%|5         | 26/450 [01:30<24:18,  3.44s/it]  6%|6         | 27/450 [01:33<24:14,  3.44s/it]  6%|6         | 28/450 [01:37<24:10,  3.44s/it]  6%|6         | 29/450 [01:40<24:20,  3.47s/it]  7%|6         | 30/450 [01:44<24:09,  3.45s/it]  7%|6         | 31/450 [01:47<24:18,  3.48s/it]  7%|7         | 32/450 [01:51<24:03,  3.45s/it]  7%|7         | 33/450 [01:54<23:51,  3.43s/it]  8%|7         | 34/450 [01:58<24:09,  3.49s/it]  8%|7         | 35/450 [02:01<23:52,  3.45s/it]  8%|8         | 36/450 [02:04<23:36,  3.42s/it]  8%|8         | 37/450 [02:08<23:39,  3.44s/it]  8%|8         | 38/450 [02:11<23:28,  3.42s/it]  9%|8         | 39/450 [02:15<23:22,  3.41s/it]  9%|8         | 40/450 [02:18<23:22,  3.42s/it]  9%|9         | 41/450 [02:21<23:07,  3.39s/it]  9%|9         | 42/450 [02:25<23:16,  3.42s/it] 10%|9         | 43/450 [02:28<23:03,  3.40s/it] 10%|9         | 44/450 [02:32<23:12,  3.43s/it] 10%|#         | 45/450 [02:35<23:07,  3.43s/it] 10%|#         | 46/450 [02:39<22:56,  3.41s/it] 10%|#         | 47/450 [02:42<23:00,  3.43s/it] 11%|#         | 48/450 [02:45<22:51,  3.41s/it] 11%|#         | 49/450 [02:49<22:56,  3.43s/it] 11%|#1        | 50/450 [02:52<22:45,  3.41s/it] 11%|#1        | 51/450 [02:56<22:35,  3.40s/it] 12%|#1        | 52/450 [02:59<22:40,  3.42s/it] 12%|#1        | 53/450 [03:02<22:28,  3.40s/it] 12%|#2        | 54/450 [03:06<22:24,  3.39s/it] 12%|#2        | 55/450 [03:09<22:26,  3.41s/it] 12%|#2        | 56/450 [03:13<22:15,  3.39s/it] 13%|#2        | 57/450 [03:16<22:23,  3.42s/it] 13%|#2        | 58/450 [03:20<22:14,  3.41s/it] 13%|#3        | 59/450 [03:23<22:09,  3.40s/it] 13%|#3        | 60/450 [03:26<22:19,  3.43s/it] 14%|#3        | 61/450 [03:30<22:12,  3.42s/it] 14%|#3        | 62/450 [03:33<22:19,  3.45s/it] 14%|#4        | 63/450 [03:37<22:01,  3.42s/it] 14%|#4        | 64/450 [03:40<21:46,  3.38s/it] 14%|#4        | 65/450 [03:43<21:45,  3.39s/it] 15%|#4        | 66/450 [03:47<21:34,  3.37s/it] 15%|#4        | 67/450 [03:50<21:22,  3.35s/it] 15%|#5        | 68/450 [03:53<21:25,  3.37s/it] 15%|#5        | 69/450 [03:57<21:15,  3.35s/it] 16%|#5        | 70/450 [04:00<21:09,  3.34s/it] 16%|#5        | 71/450 [04:03<21:10,  3.35s/it] 16%|#6        | 72/450 [04:07<21:00,  3.34s/it] 16%|#6        | 73/450 [04:10<21:03,  3.35s/it] 16%|#6        | 74/450 [04:13<20:54,  3.34s/it] 17%|#6        | 75/450 [04:17<20:59,  3.36s/it] 17%|#6        | 76/450 [04:20<20:51,  3.35s/it] 17%|#7        | 77/450 [04:24<20:51,  3.35s/it] 17%|#7        | 78/450 [04:27<21:01,  3.39s/it] 18%|#7        | 79/450 [04:30<20:48,  3.36s/it] 18%|#7        | 80/450 [04:34<20:57,  3.40s/it] 18%|#8        | 81/450 [04:37<20:51,  3.39s/it] 18%|#8        | 82/450 [04:41<20:45,  3.39s/it] 18%|#8        | 83/450 [04:44<20:47,  3.40s/it] 19%|#8        | 84/450 [04:47<20:38,  3.38s/it] 19%|#8        | 85/450 [04:51<20:31,  3.37s/it] 19%|#9        | 86/450 [04:54<20:33,  3.39s/it] 19%|#9        | 87/450 [04:57<20:26,  3.38s/it] 20%|#9        | 88/450 [05:01<20:30,  3.40s/it] 20%|#9        | 89/450 [05:04<20:18,  3.38s/it] 20%|##        | 90/450 [05:08<20:13,  3.37s/it] 20%|##        | 91/450 [05:11<20:19,  3.40s/it] 20%|##        | 92/450 [05:14<20:13,  3.39s/it] 21%|##        | 93/450 [05:18<20:16,  3.41s/it] 21%|##        | 94/450 [05:21<20:05,  3.39s/it] 21%|##1       | 95/450 [05:25<20:01,  3.38s/it] 21%|##1       | 96/450 [05:28<20:06,  3.41s/it] 22%|##1       | 97/450 [05:31<19:56,  3.39s/it] 22%|##1       | 98/450 [05:35<19:48,  3.38s/it] 22%|##2       | 99/450 [05:38<19:53,  3.40s/it] 22%|##2       | 100/450 [05:41<19:44,  3.38s/it] 22%|##2       | 101/450 [05:45<19:38,  3.38s/it] 23%|##2       | 102/450 [05:48<19:44,  3.40s/it] 23%|##2       | 103/450 [05:52<19:38,  3.40s/it] 23%|##3       | 104/450 [05:55<19:48,  3.44s/it] 23%|##3       | 105/450 [05:59<19:38,  3.41s/it] 24%|##3       | 106/450 [06:02<19:46,  3.45s/it] 24%|##3       | 107/450 [06:06<19:37,  3.43s/it] 24%|##4       | 108/450 [06:09<19:30,  3.42s/it] 24%|##4       | 109/450 [06:12<19:41,  3.46s/it] 24%|##4       | 110/450 [06:16<19:30,  3.44s/it] 25%|##4       | 111/450 [06:19<19:36,  3.47s/it] 25%|##4       | 112/450 [06:23<19:33,  3.47s/it] 25%|##5       | 113/450 [06:26<19:17,  3.43s/it]Traceback (most recent call last):
+  File "/home2/yashas.b/miniconda3/envs/dft/bin/deeph-train", line 8, in <module>
+    sys.exit(main())
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/scripts/train.py", line 15, in main
+    train_loader, val_loader, test_loader, transform = kernel.get_dataset(only_get_graph)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/kernel.py", line 289, in get_dataset
+    dataset = HData(
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 102, in __init__
+    self.process()
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 192, in process
+    data_list = [self.process_worker(folder) for folder in tqdm.tqdm(folder_list)]
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 192, in <listcomp>
+    data_list = [self.process_worker(folder) for folder in tqdm.tqdm(folder_list)]
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 151, in process_worker
+    data = get_graph(cart_coords, frac_coords, numbers, stru_id, r=self.radius, max_num_nbr=self.max_num_nbr,
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/graph.py", line 712, in get_graph
+    for k, v in local_rotation_dict_read.items():
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/_collections_abc.py", line 851, in __iter__
+    yield (key, self._mapping[key])
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/numpy/lib/_npyio_impl.py", line 256, in __getitem__
+    return format.read_array(bytes,
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/numpy/lib/format.py", line 811, in read_array
+    shape, fortran_order, dtype = _read_array_header(
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/numpy/lib/format.py", line 644, in _read_array_header
+    d = ast.literal_eval(header)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/ast.py", line 107, in literal_eval
+    return _convert(node_or_string)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/ast.py", line 93, in _convert
+    elif isinstance(node, Dict):
+KeyboardInterrupt
+ 25%|##5       | 113/450 [06:27<19:16,  3.43s/it]
