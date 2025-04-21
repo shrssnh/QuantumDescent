@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home2/yashas.b/miniconda3/envs/dft/bin/deeph-train", line 8, in <module>
+    sys.exit(main())
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/scripts/train.py", line 18, in main
+    kernel.build_model()
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/kernel.py", line 192, in build_model
+    self.model = HGNN(
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/model.py", line 547, in __init__
+    self.agni_lin = nn.linear(8, in_atom_fea_len)
+AttributeError: module 'torch.nn' has no attribute 'linear'

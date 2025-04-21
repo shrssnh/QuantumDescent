@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home2/yashas.b/miniconda3/envs/dft/bin/deeph-train", line 8, in <module>
+    sys.exit(main())
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/scripts/train.py", line 15, in main
+    train_loader, val_loader, test_loader, transform = kernel.get_dataset(only_get_graph)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/kernel.py", line 289, in get_dataset
+    dataset = HData(
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 102, in __init__
+    self.process()
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 184, in process
+    assert len(folder_list) != 0, "Can not find any structure"
+AssertionError: Can not find any structure

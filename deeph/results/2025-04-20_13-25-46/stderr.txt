@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/home2/yashas.b/miniconda3/envs/dft/bin/deeph-train", line 8, in <module>
+    sys.exit(main())
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/scripts/train.py", line 20, in main
+    kernel.train(train_loader, val_loader, test_loader)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/kernel.py", line 514, in train
+    train_losses = self.kernel_fn(train_loader, 'TRAIN')
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/kernel.py", line 671, in kernel_fn
+    output = self.model(
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/model.py", line 627, in forward
+    agni_emb = self.agni_lin(agni)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (1x3456 and 8x64)

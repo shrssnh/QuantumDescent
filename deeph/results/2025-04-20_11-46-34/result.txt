@@ -1,0 +1,822 @@
+====== CONFIG ======
+[basic]
+graph_dir=./training
+save_dir=./results/2025-04-20_11-46-34
+raw_dir=../../graphene_dataset/processed/
+dataset_name=../../graphene_dataset
+only_get_graph=False
+interface=npz
+target=hamiltonian
+disable_cuda=False
+device=cuda:0
+num_threads=-1
+save_to_time_folder=True
+save_csv=False
+tb_writer=True
+seed=42
+multiprocessing=0
+orbital=[{"6 6": [0, 0]}, {"6 6": [0, 1]}, {"6 6": [0, 2]}, {"6 6": [0, 3]}, {"6 6": [0, 4]}, {"6 6": [0, 5]}, {"6 6": [0, 6]}, {"6 6": [0, 7]}, {"6 6": [0, 8]}, {"6 6": [0, 9]}, {"6 6": [0, 10]}, {"6 6": [0, 11]}, {"6 6": [0, 12]}, {"6 6": [1, 0]}, {"6 6": [1, 1]}, {"6 6": [1, 2]}, {"6 6": [1, 3]}, {"6 6": [1, 4]}, {"6 6": [1, 5]}, {"6 6": [1, 6]}, {"6 6": [1, 7]}, {"6 6": [1, 8]}, {"6 6": [1, 9]}, {"6 6": [1, 10]}, {"6 6": [1, 11]}, {"6 6": [1, 12]}, {"6 6": [2, 0]}, {"6 6": [2, 1]}, {"6 6": [2, 2]}, {"6 6": [2, 3]}, {"6 6": [2, 4]}, {"6 6": [2, 5]}, {"6 6": [2, 6]}, {"6 6": [2, 7]}, {"6 6": [2, 8]}, {"6 6": [2, 9]}, {"6 6": [2, 10]}, {"6 6": [2, 11]}, {"6 6": [2, 12]}, {"6 6": [3, 0]}, {"6 6": [3, 1]}, {"6 6": [3, 2]}, {"6 6": [3, 3]}, {"6 6": [3, 4]}, {"6 6": [3, 5]}, {"6 6": [3, 6]}, {"6 6": [3, 7]}, {"6 6": [3, 8]}, {"6 6": [3, 9]}, {"6 6": [3, 10]}, {"6 6": [3, 11]}, {"6 6": [3, 12]}, {"6 6": [4, 0]}, {"6 6": [4, 1]}, {"6 6": [4, 2]}, {"6 6": [4, 3]}, {"6 6": [4, 4]}, {"6 6": [4, 5]}, {"6 6": [4, 6]}, {"6 6": [4, 7]}, {"6 6": [4, 8]}, {"6 6": [4, 9]}, {"6 6": [4, 10]}, {"6 6": [4, 11]}, {"6 6": [4, 12]}, {"6 6": [5, 0]}, {"6 6": [5, 1]}, {"6 6": [5, 2]}, {"6 6": [5, 3]}, {"6 6": [5, 4]}, {"6 6": [5, 5]}, {"6 6": [5, 6]}, {"6 6": [5, 7]}, {"6 6": [5, 8]}, {"6 6": [5, 9]}, {"6 6": [5, 10]}, {"6 6": [5, 11]}, {"6 6": [5, 12]}, {"6 6": [6, 0]}, {"6 6": [6, 1]}, {"6 6": [6, 2]}, {"6 6": [6, 3]}, {"6 6": [6, 4]}, {"6 6": [6, 5]}, {"6 6": [6, 6]}, {"6 6": [6, 7]}, {"6 6": [6, 8]}, {"6 6": [6, 9]}, {"6 6": [6, 10]}, {"6 6": [6, 11]}, {"6 6": [6, 12]}, {"6 6": [7, 0]}, {"6 6": [7, 1]}, {"6 6": [7, 2]}, {"6 6": [7, 3]}, {"6 6": [7, 4]}, {"6 6": [7, 5]}, {"6 6": [7, 6]}, {"6 6": [7, 7]}, {"6 6": [7, 8]}, {"6 6": [7, 9]}, {"6 6": [7, 10]}, {"6 6": [7, 11]}, {"6 6": [7, 12]}, {"6 6": [8, 0]}, {"6 6": [8, 1]}, {"6 6": [8, 2]}, {"6 6": [8, 3]}, {"6 6": [8, 4]}, {"6 6": [8, 5]}, {"6 6": [8, 6]}, {"6 6": [8, 7]}, {"6 6": [8, 8]}, {"6 6": [8, 9]}, {"6 6": [8, 10]}, {"6 6": [8, 11]}, {"6 6": [8, 12]}, {"6 6": [9, 0]}, {"6 6": [9, 1]}, {"6 6": [9, 2]}, {"6 6": [9, 3]}, {"6 6": [9, 4]}, {"6 6": [9, 5]}, {"6 6": [9, 6]}, {"6 6": [9, 7]}, {"6 6": [9, 8]}, {"6 6": [9, 9]}, {"6 6": [9, 10]}, {"6 6": [9, 11]}, {"6 6": [9, 12]}, {"6 6": [10, 0]}, {"6 6": [10, 1]}, {"6 6": [10, 2]}, {"6 6": [10, 3]}, {"6 6": [10, 4]}, {"6 6": [10, 5]}, {"6 6": [10, 6]}, {"6 6": [10, 7]}, {"6 6": [10, 8]}, {"6 6": [10, 9]}, {"6 6": [10, 10]}, {"6 6": [10, 11]}, {"6 6": [10, 12]}, {"6 6": [11, 0]}, {"6 6": [11, 1]}, {"6 6": [11, 2]}, {"6 6": [11, 3]}, {"6 6": [11, 4]}, {"6 6": [11, 5]}, {"6 6": [11, 6]}, {"6 6": [11, 7]}, {"6 6": [11, 8]}, {"6 6": [11, 9]}, {"6 6": [11, 10]}, {"6 6": [11, 11]}, {"6 6": [11, 12]}, {"6 6": [12, 0]}, {"6 6": [12, 1]}, {"6 6": [12, 2]}, {"6 6": [12, 3]}, {"6 6": [12, 4]}, {"6 6": [12, 5]}, {"6 6": [12, 6]}, {"6 6": [12, 7]}, {"6 6": [12, 8]}, {"6 6": [12, 9]}, {"6 6": [12, 10]}, {"6 6": [12, 11]}, {"6 6": [12, 12]}]
+o_component=H
+energy_component=summation
+max_element=-1
+statistics=False
+normalizer=False
+boxcox=False
+
+[graph]
+radius=-1.0
+max_num_nbr=0
+create_from_dft=False
+if_lcmp_graph=True
+separate_onsite=False
+new_sp=False
+
+[train]
+epochs=4000
+pretrained=
+resume=
+train_ratio=0.6
+val_ratio=0.2
+test_ratio=0.2
+early_stopping_loss=0.0
+early_stopping_loss_epoch=[0.000000, 500]
+revert_then_decay=True
+revert_threshold=30
+revert_decay_epoch=[500, 2000, 3000]
+revert_decay_gamma=[0.4, 0.5, 0.5]
+clip_grad=True
+clip_grad_value=4.2
+switch_sgd=False
+switch_sgd_lr=1e-4
+switch_sgd_epoch=-1
+
+[hyperparameter]
+batch_size=3
+dtype=float32
+optimizer=adam
+learning_rate=0.001
+lr_scheduler=
+lr_milestones=[]
+momentum=0.9
+weight_decay=0
+criterion=MaskMSELoss
+retain_edge_fea=True
+lambda_eij=0.0
+lambda_ei=0.1
+lambda_etot=0.0
+
+[network]
+atom_fea_len=64
+edge_fea_len=128
+gauss_stop=6
+num_l=5
+aggr=add
+distance_expansion=GaussianBasis
+if_exp=True
+if_multiplelinear=True
+if_edge_update=True
+if_agni=True
+if_lcmp=True
+normalization=LayerNorm
+atom_update_net=CGConv
+trainable_gaussians=False
+type_affine=False
+
+Graph data file: HGraph-npz-../../graphene_dataset-5l--1.0r0mn.pkl
+Process new data file......
+../../graphene_dataset/processed/
+../../graphene_dataset/processed/3610
+../../graphene_dataset/processed/4000
+../../graphene_dataset/processed/2160
+../../graphene_dataset/processed/4430
+../../graphene_dataset/processed/1850
+../../graphene_dataset/processed/830
+../../graphene_dataset/processed/3270
+../../graphene_dataset/processed/3780
+../../graphene_dataset/processed/4550
+../../graphene_dataset/processed/3920
+../../graphene_dataset/processed/2080
+../../graphene_dataset/processed/600
+../../graphene_dataset/processed/1640
+../../graphene_dataset/processed/1380
+../../graphene_dataset/processed/2860
+../../graphene_dataset/processed/4510
+../../graphene_dataset/processed/2510
+../../graphene_dataset/processed/4220
+../../graphene_dataset/processed/4830
+../../graphene_dataset/processed/2040
+../../graphene_dataset/processed/870
+../../graphene_dataset/processed/4620
+../../graphene_dataset/processed/1350
+../../graphene_dataset/processed/4850
+../../graphene_dataset/processed/4610
+../../graphene_dataset/processed/4810
+../../graphene_dataset/processed/1410
+../../graphene_dataset/processed/4340
+../../graphene_dataset/processed/4570
+../../graphene_dataset/processed/3600
+../../graphene_dataset/processed/3030
+../../graphene_dataset/processed/920
+../../graphene_dataset/processed/4100
+../../graphene_dataset/processed/2360
+../../graphene_dataset/processed/3240
+../../graphene_dataset/processed/2460
+../../graphene_dataset/processed/3980
+../../graphene_dataset/processed/3110
+../../graphene_dataset/processed/2710
+../../graphene_dataset/processed/4320
+../../graphene_dataset/processed/2900
+../../graphene_dataset/processed/2820
+../../graphene_dataset/processed/3750
+../../graphene_dataset/processed/1620
+../../graphene_dataset/processed/1820
+../../graphene_dataset/processed/1770
+../../graphene_dataset/processed/3360
+../../graphene_dataset/processed/3540
+../../graphene_dataset/processed/3020
+../../graphene_dataset/processed/3790
+../../graphene_dataset/processed/2770
+../../graphene_dataset/processed/4060
+../../graphene_dataset/processed/2320
+../../graphene_dataset/processed/1300
+../../graphene_dataset/processed/4280
+../../graphene_dataset/processed/4180
+../../graphene_dataset/processed/3260
+../../graphene_dataset/processed/2260
+../../graphene_dataset/processed/2000
+../../graphene_dataset/processed/3190
+../../graphene_dataset/processed/4420
+../../graphene_dataset/processed/540
+../../graphene_dataset/processed/3220
+../../graphene_dataset/processed/1030
+../../graphene_dataset/processed/4910
+../../graphene_dataset/processed/3470
+../../graphene_dataset/processed/2800
+../../graphene_dataset/processed/1170
+../../graphene_dataset/processed/2570
+../../graphene_dataset/processed/590
+../../graphene_dataset/processed/2180
+../../graphene_dataset/processed/1610
+../../graphene_dataset/processed/3460
+../../graphene_dataset/processed/2520
+../../graphene_dataset/processed/570
+../../graphene_dataset/processed/2550
+../../graphene_dataset/processed/3500
+../../graphene_dataset/processed/2750
+../../graphene_dataset/processed/4680
+../../graphene_dataset/processed/4290
+../../graphene_dataset/processed/650
+../../graphene_dataset/processed/4900
+../../graphene_dataset/processed/4130
+../../graphene_dataset/processed/3040
+../../graphene_dataset/processed/4040
+../../graphene_dataset/processed/1980
+../../graphene_dataset/processed/1340
+../../graphene_dataset/processed/1810
+../../graphene_dataset/processed/800
+../../graphene_dataset/processed/1880
+../../graphene_dataset/processed/1420
+../../graphene_dataset/processed/2530
+../../graphene_dataset/processed/4670
+../../graphene_dataset/processed/3820
+../../graphene_dataset/processed/2610
+../../graphene_dataset/processed/4390
+../../graphene_dataset/processed/3010
+../../graphene_dataset/processed/1760
+../../graphene_dataset/processed/4660
+../../graphene_dataset/processed/990
+../../graphene_dataset/processed/4960
+../../graphene_dataset/processed/4750
+../../graphene_dataset/processed/4950
+../../graphene_dataset/processed/4500
+../../graphene_dataset/processed/4070
+../../graphene_dataset/processed/4360
+../../graphene_dataset/processed/4540
+../../graphene_dataset/processed/4030
+../../graphene_dataset/processed/2230
+../../graphene_dataset/processed/3690
+../../graphene_dataset/processed/3330
+../../graphene_dataset/processed/1660
+../../graphene_dataset/processed/970
+../../graphene_dataset/processed/1520
+../../graphene_dataset/processed/4590
+../../graphene_dataset/processed/750
+../../graphene_dataset/processed/2960
+../../graphene_dataset/processed/4730
+../../graphene_dataset/processed/1220
+../../graphene_dataset/processed/2670
+../../graphene_dataset/processed/1160
+../../graphene_dataset/processed/4630
+../../graphene_dataset/processed/2140
+../../graphene_dataset/processed/730
+../../graphene_dataset/processed/1960
+../../graphene_dataset/processed/1140
+../../graphene_dataset/processed/3640
+../../graphene_dataset/processed/2560
+../../graphene_dataset/processed/530
+../../graphene_dataset/processed/1650
+../../graphene_dataset/processed/4300
+../../graphene_dataset/processed/4090
+../../graphene_dataset/processed/620
+../../graphene_dataset/processed/4230
+../../graphene_dataset/processed/3710
+../../graphene_dataset/processed/2010
+../../graphene_dataset/processed/1940
+../../graphene_dataset/processed/520
+../../graphene_dataset/processed/1000
+../../graphene_dataset/processed/2990
+../../graphene_dataset/processed/4380
+../../graphene_dataset/processed/2110
+../../graphene_dataset/processed/3970
+../../graphene_dataset/processed/1690
+../../graphene_dataset/processed/3990
+../../graphene_dataset/processed/2120
+../../graphene_dataset/processed/2760
+../../graphene_dataset/processed/3890
+../../graphene_dataset/processed/850
+../../graphene_dataset/processed/1530
+../../graphene_dataset/processed/2740
+../../graphene_dataset/processed/4150
+../../graphene_dataset/processed/3840
+../../graphene_dataset/processed/660
+../../graphene_dataset/processed/860
+../../graphene_dataset/processed/2950
+../../graphene_dataset/processed/4310
+../../graphene_dataset/processed/1900
+../../graphene_dataset/processed/4710
+../../graphene_dataset/processed/3910
+../../graphene_dataset/processed/3130
+../../graphene_dataset/processed/3450
+../../graphene_dataset/processed/4580
+../../graphene_dataset/processed/4440
+../../graphene_dataset/processed/1370
+../../graphene_dataset/processed/1800
+../../graphene_dataset/processed/1910
+../../graphene_dataset/processed/2370
+../../graphene_dataset/processed/1180
+../../graphene_dataset/processed/2270
+../../graphene_dataset/processed/1990
+../../graphene_dataset/processed/3860
+../../graphene_dataset/processed/4480
+../../graphene_dataset/processed/3140
+../../graphene_dataset/processed/2650
+../../graphene_dataset/processed/1270
+../../graphene_dataset/processed/1390
+../../graphene_dataset/processed/4860
+../../graphene_dataset/processed/950
+../../graphene_dataset/processed/2930
+../../graphene_dataset/processed/1050
+../../graphene_dataset/processed/2470
+../../graphene_dataset/processed/1010
+../../graphene_dataset/processed/2920
+../../graphene_dataset/processed/1550
+../../graphene_dataset/processed/2340
+../../graphene_dataset/processed/780
+../../graphene_dataset/processed/1100
+../../graphene_dataset/processed/2400
+../../graphene_dataset/processed/770
+../../graphene_dataset/processed/4930
+../../graphene_dataset/processed/3280
+../../graphene_dataset/processed/2590
+../../graphene_dataset/processed/2280
+../../graphene_dataset/processed/4110
+../../graphene_dataset/processed/1930
+../../graphene_dataset/processed/2630
+../../graphene_dataset/processed/1840
+../../graphene_dataset/processed/3520
+../../graphene_dataset/processed/4720
+../../graphene_dataset/processed/2540
+../../graphene_dataset/processed/1730
+../../graphene_dataset/processed/1360
+../../graphene_dataset/processed/4560
+../../graphene_dataset/processed/3730
+../../graphene_dataset/processed/1740
+../../graphene_dataset/processed/4990
+../../graphene_dataset/processed/2420
+../../graphene_dataset/processed/2430
+../../graphene_dataset/processed/4120
+../../graphene_dataset/processed/4890
+../../graphene_dataset/processed/2640
+../../graphene_dataset/processed/4470
+../../graphene_dataset/processed/1560
+../../graphene_dataset/processed/2790
+../../graphene_dataset/processed/3430
+../../graphene_dataset/processed/1750
+../../graphene_dataset/processed/2330
+../../graphene_dataset/processed/3570
+../../graphene_dataset/processed/4690
+../../graphene_dataset/processed/3210
+../../graphene_dataset/processed/4920
+../../graphene_dataset/processed/3380
+../../graphene_dataset/processed/1200
+../../graphene_dataset/processed/4980
+../../graphene_dataset/processed/4800
+../../graphene_dataset/processed/550
+../../graphene_dataset/processed/1130
+../../graphene_dataset/processed/4450
+../../graphene_dataset/processed/1720
+../../graphene_dataset/processed/4140
+../../graphene_dataset/processed/1060
+../../graphene_dataset/processed/1430
+../../graphene_dataset/processed/4020
+../../graphene_dataset/processed/2600
+../../graphene_dataset/processed/3700
+../../graphene_dataset/processed/810
+../../graphene_dataset/processed/500
+../../graphene_dataset/processed/1830
+../../graphene_dataset/processed/3290
+../../graphene_dataset/processed/2910
+../../graphene_dataset/processed/2310
+../../graphene_dataset/processed/700
+../../graphene_dataset/processed/3410
+../../graphene_dataset/processed/3680
+../../graphene_dataset/processed/4350
+../../graphene_dataset/processed/2480
+../../graphene_dataset/processed/580
+../../graphene_dataset/processed/2170
+../../graphene_dataset/processed/900
+../../graphene_dataset/processed/3590
+../../graphene_dataset/processed/1280
+../../graphene_dataset/processed/4650
+../../graphene_dataset/processed/2890
+../../graphene_dataset/processed/1490
+../../graphene_dataset/processed/1630
+../../graphene_dataset/processed/1700
+../../graphene_dataset/processed/4770
+../../graphene_dataset/processed/1460
+../../graphene_dataset/processed/2830
+../../graphene_dataset/processed/960
+../../graphene_dataset/processed/4010
+../../graphene_dataset/processed/3580
+../../graphene_dataset/processed/3250
+../../graphene_dataset/processed/610
+../../graphene_dataset/processed/3310
+../../graphene_dataset/processed/4240
+../../graphene_dataset/processed/2130
+../../graphene_dataset/processed/3770
+../../graphene_dataset/processed/3490
+../../graphene_dataset/processed/3760
+../../graphene_dataset/processed/3050
+../../graphene_dataset/processed/2980
+../../graphene_dataset/processed/3800
+../../graphene_dataset/processed/1500
+../../graphene_dataset/processed/3900
+../../graphene_dataset/processed/4820
+../../graphene_dataset/processed/1210
+../../graphene_dataset/processed/3000
+../../graphene_dataset/processed/4740
+../../graphene_dataset/processed/4160
+../../graphene_dataset/processed/3070
+../../graphene_dataset/processed/4880
+../../graphene_dataset/processed/3850
+../../graphene_dataset/processed/2880
+../../graphene_dataset/processed/2090
+../../graphene_dataset/processed/790
+../../graphene_dataset/processed/3620
+../../graphene_dataset/processed/4530
+../../graphene_dataset/processed/2870
+../../graphene_dataset/processed/2700
+../../graphene_dataset/processed/2380
+../../graphene_dataset/processed/4780
+../../graphene_dataset/processed/3660
+../../graphene_dataset/processed/940
+../../graphene_dataset/processed/4330
+../../graphene_dataset/processed/3080
+../../graphene_dataset/processed/4970
+../../graphene_dataset/processed/4600
+../../graphene_dataset/processed/3170
+../../graphene_dataset/processed/560
+../../graphene_dataset/processed/1860
+../../graphene_dataset/processed/2030
+../../graphene_dataset/processed/2150
+../../graphene_dataset/processed/3870
+../../graphene_dataset/processed/1540
+../../graphene_dataset/processed/1890
+../../graphene_dataset/processed/1470
+../../graphene_dataset/processed/1080
+../../graphene_dataset/processed/1110
+../../graphene_dataset/processed/840
+../../graphene_dataset/processed/3530
+../../graphene_dataset/processed/4760
+../../graphene_dataset/processed/1330
+../../graphene_dataset/processed/3300
+../../graphene_dataset/processed/3400
+../../graphene_dataset/processed/2410
+../../graphene_dataset/processed/1510
+../../graphene_dataset/processed/1710
+../../graphene_dataset/processed/2070
+../../graphene_dataset/processed/1950
+../../graphene_dataset/processed/4190
+../../graphene_dataset/processed/3940
+../../graphene_dataset/processed/3950
+../../graphene_dataset/processed/880
+../../graphene_dataset/processed/2100
+../../graphene_dataset/processed/1120
+../../graphene_dataset/processed/1190
+../../graphene_dataset/processed/1230
+../../graphene_dataset/processed/1870
+../../graphene_dataset/processed/1250
+../../graphene_dataset/processed/1670
+../../graphene_dataset/processed/3440
+../../graphene_dataset/processed/3650
+../../graphene_dataset/processed/2450
+../../graphene_dataset/processed/4170
+../../graphene_dataset/processed/640
+../../graphene_dataset/processed/1780
+../../graphene_dataset/processed/2500
+../../graphene_dataset/processed/4490
+../../graphene_dataset/processed/4050
+../../graphene_dataset/processed/3560
+../../graphene_dataset/processed/690
+../../graphene_dataset/processed/4200
+../../graphene_dataset/processed/930
+../../graphene_dataset/processed/3090
+../../graphene_dataset/processed/1790
+../../graphene_dataset/processed/2620
+../../graphene_dataset/processed/3350
+../../graphene_dataset/processed/1680
+../../graphene_dataset/processed/3810
+../../graphene_dataset/processed/4520
+../../graphene_dataset/processed/2730
+../../graphene_dataset/processed/2690
+../../graphene_dataset/processed/2240
+../../graphene_dataset/processed/1290
+../../graphene_dataset/processed/2300
+../../graphene_dataset/processed/710
+../../graphene_dataset/processed/2940
+../../graphene_dataset/processed/4370
+../../graphene_dataset/processed/2580
+../../graphene_dataset/processed/2190
+../../graphene_dataset/processed/2840
+../../graphene_dataset/processed/890
+../../graphene_dataset/processed/4210
+../../graphene_dataset/processed/2810
+../../graphene_dataset/processed/1590
+../../graphene_dataset/processed/3340
+../../graphene_dataset/processed/630
+../../graphene_dataset/processed/1450
+../../graphene_dataset/processed/1150
+../../graphene_dataset/processed/1580
+../../graphene_dataset/processed/680
+../../graphene_dataset/processed/740
+../../graphene_dataset/processed/3060
+../../graphene_dataset/processed/3420
+../../graphene_dataset/processed/3630
+../../graphene_dataset/processed/2290
+../../graphene_dataset/processed/4260
+../../graphene_dataset/processed/3510
+../../graphene_dataset/processed/3100
+../../graphene_dataset/processed/3480
+../../graphene_dataset/processed/3740
+../../graphene_dataset/processed/3120
+../../graphene_dataset/processed/2780
+../../graphene_dataset/processed/3830
+../../graphene_dataset/processed/2720
+../../graphene_dataset/processed/2020
+../../graphene_dataset/processed/1400
+../../graphene_dataset/processed/1310
+../../graphene_dataset/processed/3930
+../../graphene_dataset/processed/3370
+../../graphene_dataset/processed/3670
+../../graphene_dataset/processed/4790
+../../graphene_dataset/processed/2440
+../../graphene_dataset/processed/2490
+../../graphene_dataset/processed/2060
+../../graphene_dataset/processed/3320
+../../graphene_dataset/processed/3550
+../../graphene_dataset/processed/980
+../../graphene_dataset/processed/1570
+../../graphene_dataset/processed/2680
+../../graphene_dataset/processed/910
+../../graphene_dataset/processed/4840
+../../graphene_dataset/processed/4700
+../../graphene_dataset/processed/720
+../../graphene_dataset/processed/3200
+../../graphene_dataset/processed/4250
+../../graphene_dataset/processed/1970
+../../graphene_dataset/processed/670
+../../graphene_dataset/processed/4400
+../../graphene_dataset/processed/2220
+../../graphene_dataset/processed/1920
+../../graphene_dataset/processed/2350
+../../graphene_dataset/processed/4270
+../../graphene_dataset/processed/2050
+../../graphene_dataset/processed/3160
+../../graphene_dataset/processed/1020
+../../graphene_dataset/processed/1070
+../../graphene_dataset/processed/1320
+../../graphene_dataset/processed/2210
+../../graphene_dataset/processed/1600
+../../graphene_dataset/processed/2970
+../../graphene_dataset/processed/2200
+../../graphene_dataset/processed/3230
+../../graphene_dataset/processed/3180
+../../graphene_dataset/processed/510
+../../graphene_dataset/processed/1440
+../../graphene_dataset/processed/3880
+../../graphene_dataset/processed/1240
+../../graphene_dataset/processed/4640
+../../graphene_dataset/processed/820
+../../graphene_dataset/processed/1480
+../../graphene_dataset/processed/3720
+../../graphene_dataset/processed/4410
+../../graphene_dataset/processed/4460
+../../graphene_dataset/processed/3960
+../../graphene_dataset/processed/1090
+../../graphene_dataset/processed/1260
+../../graphene_dataset/processed/3390
+../../graphene_dataset/processed/2250
+../../graphene_dataset/processed/2390
+../../graphene_dataset/processed/760
+../../graphene_dataset/processed/4870
+../../graphene_dataset/processed/4080
+../../graphene_dataset/processed/1040
+../../graphene_dataset/processed/3150
+../../graphene_dataset/processed/2660
+../../graphene_dataset/processed/4940
+../../graphene_dataset/processed/2850
+Found 450 structures, have cost 0 seconds
+Use multiprocessing (nodes = num_processors x num_threads = 1 x 12)
+  0%|          | 0/450 [00:00<?, ?it/s][[ -2.4764645    1.4200476  -14.81374   ]
+ [ -2.474142     2.8416452  -14.845309  ]
+ [ -3.6969192    3.524839   -15.05967   ]
+ [ -3.6905503    4.9946303  -15.053812  ]
+ [ -4.9371505    5.705322   -15.0533695 ]
+ [ -4.896865     7.1043406  -15.016976  ]
+ [ -6.1673636    7.8214393  -14.923379  ]
+ [ -6.1621313    9.219012   -14.868351  ]
+ [ -7.41272      9.92424    -14.727692  ]
+ [ -2.4659476   -2.816271   -14.87903   ]
+ [ -2.4877038   -1.425975   -14.731836  ]
+ [ -3.73053     -0.71432173 -14.908618  ]
+ [ -3.720967     0.7074206  -14.921501  ]
+ [ -4.908855     1.4585443  -15.174656  ]
+ [ -4.9087515    2.8347778  -15.129724  ]
+ [ -6.13592      3.5897484  -15.23162   ]
+ [ -6.1473804    4.9714007  -15.072986  ]
+ [ -7.3933873    5.6819057  -14.949692  ]
+ [ -7.3804593    7.118183   -14.900899  ]
+ [ -8.608809     7.799952   -14.851537  ]
+ [ -8.618963     9.246391   -14.835647  ]
+ [ -3.6849155   -4.976684   -14.942685  ]
+ [ -3.6825852   -3.5480666  -14.953078  ]
+ [ -4.9125547   -2.8414977  -15.129087  ]
+ [ -4.9364886   -1.4337473  -15.190553  ]
+ [ -6.16601     -0.6912298  -15.418662  ]
+ [ -6.1751432    0.7154357  -15.326086  ]
+ [ -7.3820853    1.4217746  -15.509276  ]
+ [ -7.382351     2.8950906  -15.282777  ]
+ [ -8.6317       3.578434   -15.135914  ]
+ [ -8.588189     4.9551897  -14.95319   ]
+ [ -9.845536     5.6720605  -14.826798  ]
+ [ -9.809709     7.0732727  -14.817727  ]
+ [ -4.911881    -7.066918   -14.842769  ]
+ [ -4.8797174   -5.675768   -14.975415  ]
+ [ -6.1324444   -4.994816   -15.068589  ]
+ [ -6.1638794   -3.572849   -15.203999  ]
+ [ -7.3624563   -2.8646395  -15.217599  ]
+ [ -7.3807025   -1.4043039  -15.345175  ]
+ [ -8.588929    -0.6946947  -15.421352  ]
+ [ -8.607315     0.7021064  -15.443919  ]
+ [ -9.883558     1.4226484  -15.260614  ]
+ [ -9.856474     2.8492625  -15.14516   ]
+ [-11.047654     3.547368   -14.898786  ]
+ [-11.036381     4.9726286  -14.801439  ]
+ [ -6.1675787   -9.246089   -14.832524  ]
+ [ -6.1306653   -7.8198695  -14.872214  ]
+ [ -7.341262    -7.102525   -14.978862  ]
+ [ -7.3712497   -5.703116   -15.066495  ]
+ [ -8.593822    -4.9882293  -15.056834  ]
+ [ -8.573857    -3.580233   -15.116378  ]
+ [ -9.817234    -2.8331113  -14.996102  ]
+ [ -9.83932     -1.4186445  -15.203855  ]
+ [-11.027751    -0.715148   -15.112524  ]
+ [-11.118395     0.7253124  -15.150649  ]
+ [-12.308026     1.3981289  -14.918508  ]
+ [-12.264685     2.8358622  -14.884483  ]
+ [ -7.3984857   -9.937067   -14.757011  ]
+ [ -8.613424    -9.222812   -14.858519  ]
+ [ -8.590793    -7.8307424  -14.987365  ]
+ [ -9.857847    -7.120969   -15.033724  ]
+ [ -9.839673    -5.7041535  -15.046556  ]
+ [-11.030558    -4.9737773  -15.043488  ]
+ [-11.041028    -3.5474522  -14.921029  ]
+ [-12.2385025   -2.8489447  -14.847744  ]
+ [-12.262404    -1.4392488  -14.862358  ]]
+[[-11 -12   0]
+ [-11 -14   0]
+ [ -9 -14   0]
+ [ -9 -16   0]
+ [ -8 -17   0]
+ [ -8 -18   0]
+ [ -7 -19   0]
+ [ -7 -20   0]
+ [ -6 -21   0]
+ [-11  -8   0]
+ [-11  -9   0]
+ [ -9 -10   0]
+ [ -9 -12   0]
+ [ -8 -12   0]
+ [ -8 -14   0]
+ [ -7 -14   0]
+ [ -7 -16   0]
+ [ -6 -17   0]
+ [ -6 -18   0]
+ [ -4 -19   0]
+ [ -4 -20   0]
+ [ -9  -6   0]
+ [ -9  -7   0]
+ [ -8  -8   0]
+ [ -8  -9   0]
+ [ -7 -10   0]
+ [ -7 -12   0]
+ [ -6 -12   1]
+ [ -6 -14   0]
+ [ -4 -14   0]
+ [ -4 -16   0]
+ [ -3 -17   0]
+ [ -3 -18   0]
+ [ -8  -4   0]
+ [ -8  -5   0]
+ [ -7  -6   0]
+ [ -7  -7   0]
+ [ -6  -8   0]
+ [ -6  -9   0]
+ [ -4 -10   0]
+ [ -4 -12   0]
+ [ -3 -12   0]
+ [ -3 -14   0]
+ [ -2 -14   0]
+ [ -2 -16   0]
+ [ -7  -2   0]
+ [ -7  -3   0]
+ [ -6  -4   0]
+ [ -6  -5   0]
+ [ -4  -6   0]
+ [ -4  -7   0]
+ [ -3  -8   0]
+ [ -3  -9   0]
+ [ -2 -10   0]
+ [ -2 -12   0]
+ [ -1 -12   0]
+ [ -1 -14   0]
+ [ -6  -1   0]
+ [ -4  -2   0]
+ [ -4  -3   0]
+ [ -3  -4   0]
+ [ -3  -5   0]
+ [ -2  -6   0]
+ [ -2  -7   0]
+ [ -1  -8   0]
+ [ -1  -9   0]]
+Index:  0
+cart-coord 416
+Index:  1
+cart-coord 412
+Index:  2
+cart-coord 332
+Index:  3
+cart-coord 328
+Index:  4
+cart-coord 286
+Index:  5
+cart-coord 284
+Index:  6
+cart-coord 242
+Index:  7
+cart-coord 240
+Index:  8
+cart-coord 198
+Index:  9
+cart-coord 424
+Index:  10
+cart-coord 422
+Index:  11
+cart-coord 340
+Index:  12
+cart-coord 336
+Index:  13
+cart-coord 296
+Index:  14
+cart-coord 292
+Index:  15
+cart-coord 252
+Index:  16
+cart-coord 248
+Index:  17
+cart-coord 206
+Index:  18
+cart-coord 204
+Index:  19
+cart-coord 122
+Index:  20
+cart-coord 120
+Index:  21
+cart-coord 348
+Index:  22
+cart-coord 346
+Index:  23
+cart-coord 304
+Index:  24
+cart-coord 302
+Index:  25
+cart-coord 260
+Index:  26
+cart-coord 256
+Index:  27
+cart-coord 217
+Index:  28
+cart-coord 212
+Index:  29
+cart-coord 132
+Index:  30
+cart-coord 128
+Index:  31
+cart-coord 86
+Index:  32
+cart-coord 84
+Index:  33
+cart-coord 312
+Index:  34
+cart-coord 310
+Index:  35
+cart-coord 268
+Index:  36
+cart-coord 266
+Index:  37
+cart-coord 224
+Index:  38
+cart-coord 222
+Index:  39
+cart-coord 140
+Index:  40
+cart-coord 136
+Index:  41
+cart-coord 96
+Index:  42
+cart-coord 92
+Index:  43
+cart-coord 52
+Index:  44
+cart-coord 48
+Index:  45
+cart-coord 276
+Index:  46
+cart-coord 274
+Index:  47
+cart-coord 232
+Index:  48
+cart-coord 230
+Index:  49
+cart-coord 148
+Index:  50
+cart-coord 146
+Index:  51
+cart-coord 104
+Index:  52
+cart-coord 102
+Index:  53
+cart-coord 60
+Index:  54
+cart-coord 56
+Index:  55
+cart-coord 16
+Index:  56
+cart-coord 12
+Index:  57
+cart-coord 238
+Index:  58
+cart-coord 156
+Index:  59
+cart-coord 154
+Index:  60
+cart-coord 112
+Index:  61
+cart-coord 110
+Index:  62
+cart-coord 68
+Index:  63
+cart-coord 66
+Index:  64
+cart-coord 24
+Index:  65
+cart-coord 22
+Traceback (most recent call last):
+  File "/home2/yashas.b/miniconda3/envs/dft/bin/deeph-train", line 8, in <module>
+    sys.exit(main())
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/scripts/train.py", line 15, in main
+    train_loader, val_loader, test_loader, transform = kernel.get_dataset(only_get_graph)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/kernel.py", line 289, in get_dataset
+    dataset = HData(
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 102, in __init__
+    self.process()
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 192, in process
+    data_list = [self.process_worker(folder) for folder in tqdm.tqdm(folder_list)]
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 192, in <listcomp>
+    data_list = [self.process_worker(folder) for folder in tqdm.tqdm(folder_list)]
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 151, in process_worker
+    data = get_graph(cart_coords, frac_coords, numbers, stru_id, r=self.radius, max_num_nbr=self.max_num_nbr,
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/graph.py", line 566, in get_graph
+    nn_coords_index = np.concatenate([cube_to_coords_index[k] for k in ks], axis=0)
+ValueError: need at least one array to concatenate
+  0%|          | 0/450 [00:00<?, ?it/s]

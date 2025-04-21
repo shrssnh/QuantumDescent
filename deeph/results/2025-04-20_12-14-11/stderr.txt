@@ -1,0 +1,19 @@
+  0%|          | 0/450 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home2/yashas.b/miniconda3/envs/dft/bin/deeph-train", line 8, in <module>
+    sys.exit(main())
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/scripts/train.py", line 15, in main
+    train_loader, val_loader, test_loader, transform = kernel.get_dataset(only_get_graph)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/kernel.py", line 289, in get_dataset
+    dataset = HData(
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 102, in __init__
+    self.process()
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 192, in process
+    data_list = [self.process_worker(folder) for folder in tqdm.tqdm(folder_list)]
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 192, in <listcomp>
+    data_list = [self.process_worker(folder) for folder in tqdm.tqdm(folder_list)]
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 151, in process_worker
+    data = get_graph(cart_coords, frac_coords, numbers, stru_id, r=self.radius, max_num_nbr=self.max_num_nbr,
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/graph.py", line 546, in get_graph
+    nn_coords_index = np.concatenate([cube_to_coords_index[k] for k in ks], axis=0)
+ValueError: need at least one array to concatenate
+  0%|          | 0/450 [00:00<?, ?it/s]

@@ -1,0 +1,501 @@
+====== CONFIG ======
+[basic]
+graph_dir=./training
+save_dir=./results/2025-04-20_12-27-32
+raw_dir=../../graphene_dataset/processed/
+dataset_name=../../graphene_dataset
+only_get_graph=False
+interface=npz
+target=hamiltonian
+disable_cuda=False
+device=cuda:0
+num_threads=-1
+save_to_time_folder=True
+save_csv=False
+tb_writer=True
+seed=42
+multiprocessing=0
+orbital=[{"6 6": [0, 0]}, {"6 6": [0, 1]}, {"6 6": [0, 2]}, {"6 6": [0, 3]}, {"6 6": [0, 4]}, {"6 6": [0, 5]}, {"6 6": [0, 6]}, {"6 6": [0, 7]}, {"6 6": [0, 8]}, {"6 6": [0, 9]}, {"6 6": [0, 10]}, {"6 6": [0, 11]}, {"6 6": [0, 12]}, {"6 6": [1, 0]}, {"6 6": [1, 1]}, {"6 6": [1, 2]}, {"6 6": [1, 3]}, {"6 6": [1, 4]}, {"6 6": [1, 5]}, {"6 6": [1, 6]}, {"6 6": [1, 7]}, {"6 6": [1, 8]}, {"6 6": [1, 9]}, {"6 6": [1, 10]}, {"6 6": [1, 11]}, {"6 6": [1, 12]}, {"6 6": [2, 0]}, {"6 6": [2, 1]}, {"6 6": [2, 2]}, {"6 6": [2, 3]}, {"6 6": [2, 4]}, {"6 6": [2, 5]}, {"6 6": [2, 6]}, {"6 6": [2, 7]}, {"6 6": [2, 8]}, {"6 6": [2, 9]}, {"6 6": [2, 10]}, {"6 6": [2, 11]}, {"6 6": [2, 12]}, {"6 6": [3, 0]}, {"6 6": [3, 1]}, {"6 6": [3, 2]}, {"6 6": [3, 3]}, {"6 6": [3, 4]}, {"6 6": [3, 5]}, {"6 6": [3, 6]}, {"6 6": [3, 7]}, {"6 6": [3, 8]}, {"6 6": [3, 9]}, {"6 6": [3, 10]}, {"6 6": [3, 11]}, {"6 6": [3, 12]}, {"6 6": [4, 0]}, {"6 6": [4, 1]}, {"6 6": [4, 2]}, {"6 6": [4, 3]}, {"6 6": [4, 4]}, {"6 6": [4, 5]}, {"6 6": [4, 6]}, {"6 6": [4, 7]}, {"6 6": [4, 8]}, {"6 6": [4, 9]}, {"6 6": [4, 10]}, {"6 6": [4, 11]}, {"6 6": [4, 12]}, {"6 6": [5, 0]}, {"6 6": [5, 1]}, {"6 6": [5, 2]}, {"6 6": [5, 3]}, {"6 6": [5, 4]}, {"6 6": [5, 5]}, {"6 6": [5, 6]}, {"6 6": [5, 7]}, {"6 6": [5, 8]}, {"6 6": [5, 9]}, {"6 6": [5, 10]}, {"6 6": [5, 11]}, {"6 6": [5, 12]}, {"6 6": [6, 0]}, {"6 6": [6, 1]}, {"6 6": [6, 2]}, {"6 6": [6, 3]}, {"6 6": [6, 4]}, {"6 6": [6, 5]}, {"6 6": [6, 6]}, {"6 6": [6, 7]}, {"6 6": [6, 8]}, {"6 6": [6, 9]}, {"6 6": [6, 10]}, {"6 6": [6, 11]}, {"6 6": [6, 12]}, {"6 6": [7, 0]}, {"6 6": [7, 1]}, {"6 6": [7, 2]}, {"6 6": [7, 3]}, {"6 6": [7, 4]}, {"6 6": [7, 5]}, {"6 6": [7, 6]}, {"6 6": [7, 7]}, {"6 6": [7, 8]}, {"6 6": [7, 9]}, {"6 6": [7, 10]}, {"6 6": [7, 11]}, {"6 6": [7, 12]}, {"6 6": [8, 0]}, {"6 6": [8, 1]}, {"6 6": [8, 2]}, {"6 6": [8, 3]}, {"6 6": [8, 4]}, {"6 6": [8, 5]}, {"6 6": [8, 6]}, {"6 6": [8, 7]}, {"6 6": [8, 8]}, {"6 6": [8, 9]}, {"6 6": [8, 10]}, {"6 6": [8, 11]}, {"6 6": [8, 12]}, {"6 6": [9, 0]}, {"6 6": [9, 1]}, {"6 6": [9, 2]}, {"6 6": [9, 3]}, {"6 6": [9, 4]}, {"6 6": [9, 5]}, {"6 6": [9, 6]}, {"6 6": [9, 7]}, {"6 6": [9, 8]}, {"6 6": [9, 9]}, {"6 6": [9, 10]}, {"6 6": [9, 11]}, {"6 6": [9, 12]}, {"6 6": [10, 0]}, {"6 6": [10, 1]}, {"6 6": [10, 2]}, {"6 6": [10, 3]}, {"6 6": [10, 4]}, {"6 6": [10, 5]}, {"6 6": [10, 6]}, {"6 6": [10, 7]}, {"6 6": [10, 8]}, {"6 6": [10, 9]}, {"6 6": [10, 10]}, {"6 6": [10, 11]}, {"6 6": [10, 12]}, {"6 6": [11, 0]}, {"6 6": [11, 1]}, {"6 6": [11, 2]}, {"6 6": [11, 3]}, {"6 6": [11, 4]}, {"6 6": [11, 5]}, {"6 6": [11, 6]}, {"6 6": [11, 7]}, {"6 6": [11, 8]}, {"6 6": [11, 9]}, {"6 6": [11, 10]}, {"6 6": [11, 11]}, {"6 6": [11, 12]}, {"6 6": [12, 0]}, {"6 6": [12, 1]}, {"6 6": [12, 2]}, {"6 6": [12, 3]}, {"6 6": [12, 4]}, {"6 6": [12, 5]}, {"6 6": [12, 6]}, {"6 6": [12, 7]}, {"6 6": [12, 8]}, {"6 6": [12, 9]}, {"6 6": [12, 10]}, {"6 6": [12, 11]}, {"6 6": [12, 12]}]
+o_component=H
+energy_component=summation
+max_element=-1
+statistics=False
+normalizer=False
+boxcox=False
+
+[graph]
+radius=1.0
+max_num_nbr=0
+create_from_dft=False
+if_lcmp_graph=True
+separate_onsite=False
+new_sp=False
+
+[train]
+epochs=4000
+pretrained=
+resume=
+train_ratio=0.6
+val_ratio=0.2
+test_ratio=0.2
+early_stopping_loss=0.0
+early_stopping_loss_epoch=[0.000000, 500]
+revert_then_decay=True
+revert_threshold=30
+revert_decay_epoch=[500, 2000, 3000]
+revert_decay_gamma=[0.4, 0.5, 0.5]
+clip_grad=True
+clip_grad_value=4.2
+switch_sgd=False
+switch_sgd_lr=1e-4
+switch_sgd_epoch=-1
+
+[hyperparameter]
+batch_size=3
+dtype=float32
+optimizer=adam
+learning_rate=0.001
+lr_scheduler=
+lr_milestones=[]
+momentum=0.9
+weight_decay=0
+criterion=MaskMSELoss
+retain_edge_fea=True
+lambda_eij=0.0
+lambda_ei=0.1
+lambda_etot=0.0
+
+[network]
+atom_fea_len=64
+edge_fea_len=128
+gauss_stop=6
+num_l=5
+aggr=add
+distance_expansion=GaussianBasis
+if_exp=True
+if_multiplelinear=True
+if_edge_update=True
+if_agni=True
+if_lcmp=True
+normalization=LayerNorm
+atom_update_net=CGConv
+trainable_gaussians=False
+type_affine=False
+
+Graph data file: HGraph-npz-../../graphene_dataset-5l-1.0r0mn.pkl
+Process new data file......
+Found 450 structures, have cost 0 seconds
+Use multiprocessing (nodes = num_processors x num_threads = 1 x 12)
+  0%|          | 0/450 [00:00<?, ?it/s][[13 24  1]
+ [13 20  1]
+ [13 21  1]
+ [12 22  1]
+ [12 23  1]
+ [10 24  1]
+ [13 15  1]
+ [13 17  1]
+ [12 18  1]
+ [12 19  1]
+ [10 20  1]
+ [10 21  1]
+ [ 9 22  1]
+ [ 9 23  1]
+ [ 8 24  1]
+ [13  7  1]
+ [13  8  1]
+ [13  3  1]
+ [13  4  1]
+ [12  5  1]
+ [12  6  1]
+ [13  0  1]
+ [12  0  1]
+ [12  2  1]
+ [10  3  1]
+ [10  4  1]
+ [10  0  1]
+ [ 9  0  1]
+ [ 9  2  1]
+ [ 8  0  1]
+ [13 11  1]
+ [13 13  1]
+ [12 13  1]
+ [12 15  1]
+ [10 15  1]
+ [10 17  1]
+ [ 9 18  1]
+ [ 9 19  1]
+ [ 8 20  1]
+ [ 8 21  1]
+ [ 7 22  1]
+ [ 7 23  1]
+ [12  9  1]
+ [12 10  1]
+ [10 11  1]
+ [10 13  1]
+ [ 9 13  1]
+ [ 9 15  1]
+ [ 8 15  1]
+ [ 8 17  1]
+ [ 7 18  1]
+ [ 7 19  1]
+ [ 5 20  1]
+ [ 5 21  1]
+ [10  7  1]
+ [10  8  1]
+ [ 9  9  1]
+ [ 9 10  1]
+ [ 8 11  1]
+ [ 8 13  1]
+ [ 7 13  1]
+ [ 7 15  1]
+ [ 5 15  1]
+ [ 5 17  1]
+ [ 4 18  1]
+ [ 4 19  1]
+ [ 9  5  1]
+ [ 9  6  1]
+ [ 8  7  1]
+ [ 8  8  1]
+ [ 7  9  1]
+ [ 7 10  1]
+ [ 5 11  1]
+ [ 5 13  1]
+ [ 4 13  1]
+ [ 4 15  1]
+ [ 3 15  1]
+ [ 3 17  1]
+ [ 8  3  1]
+ [ 8  4  1]
+ [ 7  5  1]
+ [ 7  6  1]
+ [ 5  7  1]
+ [ 5  8  1]
+ [ 4  9  1]
+ [ 4 10  1]
+ [ 3 11  1]
+ [ 3 13  1]
+ [ 2 13  1]
+ [ 2 15  1]
+ [ 7  1  1]
+ [ 7  2  1]
+ [ 5  3  1]
+ [ 5  4  1]
+ [ 4  5  1]
+ [ 4  6  1]
+ [ 3  7  1]
+ [ 3  8  1]
+ [ 2  9  1]
+ [ 2 10  1]
+ [ 1 11  1]
+ [ 1 13  1]
+ [ 5 24  1]
+ [ 4 22  1]
+ [ 4 23  1]
+ [ 3 24  1]
+ [ 3 20  1]
+ [ 3 21  1]
+ [ 2 22  1]
+ [ 2 23  1]
+ [ 1 24  1]
+ [ 2 18  1]
+ [ 2 19  1]
+ [ 1 20  1]
+ [ 1 21  1]
+ [ 1 15  1]
+ [ 1 17  1]
+ [ 5  0  1]
+ [ 4  0  1]
+ [ 4  2  1]
+ [ 3  3  1]
+ [ 3  4  1]
+ [ 2  5  1]
+ [ 2  6  1]
+ [ 1  7  1]
+ [ 1  8  1]
+ [ 3  0  1]
+ [ 2  1  1]
+ [ 2  2  1]
+ [ 1  3  1]
+ [ 1  4  1]
+ [ 0  0  1]]
+Index:  0
+cart-coord 1048
+Index:  1
+cart-coord 1036
+Index:  2
+cart-coord 1039
+Index:  3
+cart-coord 967
+Index:  4
+cart-coord 970
+Index:  5
+cart-coord 823
+Index:  6
+cart-coord 1021
+Index:  7
+cart-coord 1027
+Index:  8
+cart-coord 955
+Index:  9
+cart-coord 958
+Index:  10
+cart-coord 811
+Index:  11
+cart-coord 814
+Index:  12
+cart-coord 742
+Index:  13
+cart-coord 745
+Index:  14
+cart-coord 673
+Index:  15
+cart-coord 997
+Index:  16
+cart-coord 1000
+Index:  17
+cart-coord 985
+Index:  18
+cart-coord 988
+Index:  19
+cart-coord 916
+Index:  20
+cart-coord 919
+Index:  21
+cart-coord 976
+Index:  22
+cart-coord 901
+Index:  23
+cart-coord 907
+Index:  24
+cart-coord 760
+Index:  25
+cart-coord 763
+Index:  26
+cart-coord 751
+Index:  27
+cart-coord 676
+Index:  28
+cart-coord 682
+Index:  29
+cart-coord 601
+Index:  30
+cart-coord 1009
+Index:  31
+cart-coord 1015
+Index:  32
+cart-coord 940
+Index:  33
+cart-coord 946
+Index:  34
+cart-coord 796
+Index:  35
+cart-coord 802
+Index:  36
+cart-coord 730
+Index:  37
+cart-coord 733
+Index:  38
+cart-coord 661
+Index:  39
+cart-coord 664
+Index:  40
+cart-coord 592
+Index:  41
+cart-coord 595
+Index:  42
+cart-coord 928
+Index:  43
+cart-coord 931
+Index:  44
+cart-coord 784
+Index:  45
+cart-coord 790
+Index:  46
+cart-coord 715
+Index:  47
+cart-coord 721
+Index:  48
+cart-coord 646
+Index:  49
+cart-coord 652
+Index:  50
+cart-coord 580
+Index:  51
+cart-coord 583
+Index:  52
+cart-coord 436
+Index:  53
+cart-coord 439
+Index:  54
+cart-coord 772
+Index:  55
+cart-coord 775
+Index:  56
+cart-coord 703
+Index:  57
+cart-coord 706
+Index:  58
+cart-coord 634
+Index:  59
+cart-coord 640
+Index:  60
+cart-coord 565
+Index:  61
+cart-coord 571
+Index:  62
+cart-coord 421
+Index:  63
+cart-coord 427
+Index:  64
+cart-coord 355
+Index:  65
+cart-coord 358
+Index:  66
+cart-coord 691
+Index:  67
+cart-coord 694
+Index:  68
+cart-coord 622
+Index:  69
+cart-coord 625
+Index:  70
+cart-coord 553
+Index:  71
+cart-coord 556
+Index:  72
+cart-coord 409
+Index:  73
+cart-coord 415
+Index:  74
+cart-coord 340
+Index:  75
+cart-coord 346
+Index:  76
+cart-coord 271
+Index:  77
+cart-coord 277
+Index:  78
+cart-coord 610
+Index:  79
+cart-coord 613
+Index:  80
+cart-coord 541
+Index:  81
+cart-coord 544
+Index:  82
+cart-coord 397
+Index:  83
+cart-coord 400
+Index:  84
+cart-coord 328
+Index:  85
+cart-coord 331
+Index:  86
+cart-coord 259
+Index:  87
+cart-coord 265
+Index:  88
+cart-coord 190
+Index:  89
+cart-coord 196
+Index:  90
+cart-coord 529
+Index:  91
+cart-coord 532
+Index:  92
+cart-coord 385
+Index:  93
+cart-coord 388
+Index:  94
+cart-coord 316
+Index:  95
+cart-coord 319
+Index:  96
+cart-coord 247
+Index:  97
+cart-coord 250
+Index:  98
+cart-coord 178
+Index:  99
+cart-coord 181
+Index:  100
+cart-coord 109
+Index:  101
+cart-coord 115
+Index:  102
+cart-coord 448
+Index:  103
+cart-coord 367
+Index:  104
+cart-coord 370
+Index:  105
+cart-coord 298
+Index:  106
+cart-coord 286
+Index:  107
+cart-coord 289
+Index:  108
+cart-coord 217
+Index:  109
+cart-coord 220
+Index:  110
+cart-coord 148
+Index:  111
+cart-coord 205
+Index:  112
+cart-coord 208
+Index:  113
+cart-coord 136
+Index:  114
+cart-coord 139
+Index:  115
+cart-coord 121
+Index:  116
+cart-coord 127
+Index:  117
+cart-coord 376
+Index:  118
+cart-coord 301
+Index:  119
+cart-coord 307
+Index:  120
+cart-coord 235
+Index:  121
+cart-coord 238
+Index:  122
+cart-coord 166
+Index:  123
+cart-coord 169
+Index:  124
+cart-coord 97
+Index:  125
+cart-coord 100
+Index:  126
+cart-coord 226
+Index:  127
+cart-coord 154
+Index:  128
+cart-coord 157
+Index:  129
+cart-coord 85
+Index:  130
+cart-coord 88
+Index:  131
+cart-coord 1
+Traceback (most recent call last):
+  File "/home2/yashas.b/miniconda3/envs/dft/bin/deeph-train", line 8, in <module>
+    sys.exit(main())
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/scripts/train.py", line 15, in main
+    train_loader, val_loader, test_loader, transform = kernel.get_dataset(only_get_graph)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/kernel.py", line 289, in get_dataset
+    dataset = HData(
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 102, in __init__
+    self.process()
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 192, in process
+    data_list = [self.process_worker(folder) for folder in tqdm.tqdm(folder_list)]
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 192, in <listcomp>
+    data_list = [self.process_worker(folder) for folder in tqdm.tqdm(folder_list)]
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 159, in process_worker
+    agni = torch.tensor(np.load(os.path.join(folder, 'unzipped/fingerprints.npy').T), dtype=self.default_dtype_torch)
+AttributeError: 'str' object has no attribute 'T'
+  0%|          | 0/450 [00:01<?, ?it/s]
