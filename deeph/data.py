@@ -102,7 +102,7 @@ raw_data_dir
             self.process()
         begin = time.time()
         try:
-            loaded_data = torch.load(self.data_file)
+            loaded_data = torch.load(self.data_file, weights_only=False)
         except AttributeError:
             raise RuntimeError('Error in loading graph data file, try to delete it and generate the graph file with the current version of PyG')
         if len(loaded_data) == 2:
@@ -153,7 +153,7 @@ raw_data_dir
                          separate_onsite=self.separate_onsite,
                          target=self.target, huge_structure=huge_structure, if_new_sp=self.new_sp, **kwargs)
         
-        agni = torch.tensor(np.load(os.path.join(folder, 'unzipped/fingerprints.npy').T), dtype=self.default_dtype_torch)
+        agni = torch.tensor(np.load(os.path.join(folder, 'unzipped/fingerprints.npy')).T, dtype=self.default_dtype_torch)
         data.agni = agni
 
         return data
@@ -177,7 +177,7 @@ raw_data_dir
             folder_list = folder_list[500:5000:3]
         if self.dataset_name == 'bp_bilayer':
             folder_list = folder_list[:600]
-        assert len(folder_list) != 0, "Can not find any structure"
+        assert len(folder_list) != 0, f"Can not find any structure in {self.raw_data_dir}, folder list {folder_list}"
         print('Found %d structures, have cost %d seconds' % (len(folder_list), time.time() - begin))
 
         if self.multiprocessing == 0:

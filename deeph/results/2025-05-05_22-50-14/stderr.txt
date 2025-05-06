@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home2/yashas.b/miniconda3/envs/dft/bin/deeph-train", line 8, in <module>
+    sys.exit(main())
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/scripts/train.py", line 15, in main
+    train_loader, val_loader, test_loader, transform = kernel.get_dataset(only_get_graph)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/kernel.py", line 289, in get_dataset
+    dataset = HData(
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/deeph/data.py", line 105, in __init__
+    loaded_data = torch.load(self.data_file, weights_only=False)
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/torch/serialization.py", line 1432, in load
+    with _open_zipfile_reader(opened_file) as opened_zipfile:
+  File "/home2/yashas.b/miniconda3/envs/dft/lib/python3.9/site-packages/torch/serialization.py", line 763, in __init__
+    super().__init__(torch._C.PyTorchFileReader(name_or_buffer))
+RuntimeError: PytorchStreamReader failed reading zip archive: failed finding central directory

@@ -510,11 +510,14 @@ def get_graph(cart_coords, frac_coords, numbers, stru_id, r, max_num_nbr, numeri
         valid_coords_np = valid_coords.detach().numpy()
         all_cube_index = _compute_cube_index(valid_coords_np, global_min, r)
         nx, ny, nz = _compute_cube_index(global_max, global_min, r) + 1
+        print(all_cube_index)
         all_cube_index = _three_to_one(all_cube_index, ny, nz)
         site_cube_index = _three_to_one(_compute_cube_index(cart_coords_np, global_min, r), ny, nz)
         cube_to_coords_index = collections.defaultdict(list)  #type: dict[int, list]
 
         for index, cart_coord in enumerate(all_cube_index.ravel()):
+            print("Index: ", index)
+            print("cart-coord", cart_coord)
             cube_to_coords_index[cart_coord].append(index)
 
         site_neighbors = find_neighbors(site_cube_index, nx, ny, nz)

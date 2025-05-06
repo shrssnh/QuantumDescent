@@ -142,8 +142,6 @@ raw_data_dir
         numbers = torch.tensor(structure.atomic_numbers)
         structure.lattice.matrix.setflags(write=True)
         lattice = torch.tensor(structure.lattice.matrix, dtype=self.default_dtype_torch)
-        # print("Cart coords: ", cart_coords)
-        # print("Frac coords: ", frac_coords)
         if self.target == 'E_ij':
             huge_structure = True
         else:
@@ -154,7 +152,6 @@ raw_data_dir
                          create_from_DFT=self.create_from_DFT, if_lcmp_graph=self.if_lcmp_graph,
                          separate_onsite=self.separate_onsite,
                          target=self.target, huge_structure=huge_structure, if_new_sp=self.new_sp, **kwargs)
-
         
         agni = torch.tensor(np.load(os.path.join(folder, 'unzipped/fingerprints.npy')).T, dtype=self.default_dtype_torch)
         data.agni = agni
@@ -164,16 +161,12 @@ raw_data_dir
     def process(self):
         begin = time.time()
         folder_list = []
-        # print(self.raw_data_dir)
+        print(self.raw_data_dir)
         for root, dirs, files in os.walk(self.raw_data_dir):
-            # print("Root: ", root)
-            # print("Dirs: ", dirs)
-            # print("Files: ", files)
             if (self.interface == 'h5' and 'rc.h5' in files) or (
                     self.interface == 'npz' and 'rc.npz' in files):
-                # print(root)
                 folder_list.append(root)
-        # print("FOLDERS:", folder_list)
+        print("FOLDERS:", folder_list)
         folder_list = sorted(folder_list)
         folder_list = folder_list[: self.nums]
         if self.dataset_name == 'graphene_150':
@@ -184,7 +177,7 @@ raw_data_dir
             folder_list = folder_list[500:5000:3]
         if self.dataset_name == 'bp_bilayer':
             folder_list = folder_list[:600]
-        assert len(folder_list) != 0, "Can not find any structure"
+        assert len(folder_list) != 0, f"Can not find any structure in {self.raw_data_dir}, folder list {folder_list}"
         print('Found %d structures, have cost %d seconds' % (len(folder_list), time.time() - begin))
 
         if self.multiprocessing == 0:
