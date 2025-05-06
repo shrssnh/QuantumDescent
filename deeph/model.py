@@ -12,6 +12,7 @@ from torch_geometric.nn.inits import glorot, zeros
 from torch_geometric.utils import softmax
 from torch_geometric.nn.models.dimenet import BesselBasisLayer
 from torch_scatter import scatter_add, scatter
+from torch.nn import TransformerEncoder, TransformerEncoderLayer
 import numpy as np
 from scipy.special import comb
 
@@ -540,7 +541,8 @@ class HGNN(nn.Module):
     def __init__(self, num_species, in_atom_fea_len, in_edge_fea_len, num_orbital,
                  distance_expansion, gauss_stop, if_exp, if_MultipleLinear, if_edge_update, if_agni, if_lcmp,
                  normalization, atom_update_net, separate_onsite,
-                 trainable_gaussians, type_affine, num_l=5):
+                 trainable_gaussians, type_affine, num_l=5, use_transformer=False,
+                 transformer_dim=None, transformer_heads=4, transformer_layers=1):
         super(HGNN, self).__init__()
         self.num_species = num_species
         self.embed = nn.Embedding(num_species + 5, in_atom_fea_len)
@@ -619,7 +621,22 @@ class HGNN(nn.Module):
             self.mp_output = MPLayer(in_atom_fea_len, in_edge_fea_len, num_orbital, if_exp, if_edge_update=True,
                                      normalization=normalization, atom_update_net=atom_update_net,
                                      gauss_stop=gauss_stop, output_layer=True)
+            
+        d_model = transformer_dim or num_orbital
 
+        self.use_transformer = use_transformer
+        if self.use_transformer:
+            encoder_layer = TransformerEncoderLayer(
+                d_model=d_model,
+                nhead=transformer_heads,
+                dim_feedforward=d_model * 4,
+                dropout=0.1,
+                activation='relu',
+            )
+            self.transformer = TransformerEncoder(
+                encoder_layer,
+                num_layers=transformer_layers,
+            )
 
     def forward(self, atom_attr, edge_idx, edge_attr, batch,
                 sub_atom_idx=None, sub_edge_idx=None, sub_edge_ang=None, sub_index=None,
@@ -677,6 +694,11 @@ class HGNN(nn.Module):
             else:
                 atom_fea, edge_fea = self.mp_output(atom_fea, edge_idx, edge_fea0, batch, distance, edge_vec)
                 out = edge_fea
+
+        if self.use_transformer:
+            seq = edge_fea.unsqueeze(1)
+            seq = self.transformer(seq)
+            edge_fea = seq.squeeze(1)
 
         if self.if_MultipleLinear == True:
             out = self.multiple_linear1(F.silu(out), batch_edge)

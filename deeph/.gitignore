@@ -1,0 +1,5 @@
+./results
+ran.sh
+script.sh
+err.slurm
+out.slurm
