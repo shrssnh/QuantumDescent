@@ -657,16 +657,29 @@ class DeepHKernel:
             if self.if_lcmp:
                 batch, subgraph = batch_tuple
                 sub_atom_idx, sub_edge_idx, sub_edge_ang, sub_index = subgraph
-                output = self.model(
-                    batch.x.to(self.device),
-                    batch.edge_index.to(self.device),
-                    batch.edge_attr.to(self.device),
-                    batch.batch.to(self.device),
-                    sub_atom_idx.to(self.device),
-                    sub_edge_idx.to(self.device),
-                    sub_edge_ang.to(self.device),
-                    sub_index.to(self.device),
-                )
+                if self.if_agni:
+                    output = self.model(
+                        batch.x.to(self.device),
+                        batch.edge_index.to(self.device),
+                        batch.edge_attr.to(self.device),
+                        batch.batch.to(self.device),
+                        sub_atom_idx.to(self.device),
+                        sub_edge_idx.to(self.device),
+                        sub_edge_ang.to(self.device),
+                        sub_index.to(self.device),
+                        agni=batch.agni.to(self.device),
+                    )
+                else:
+                    output = self.model(
+                        batch.x.to(self.device),
+                        batch.edge_index.to(self.device),
+                        batch.edge_attr.to(self.device),
+                        batch.batch.to(self.device),
+                        sub_atom_idx.to(self.device),
+                        sub_edge_idx.to(self.device),
+                        sub_edge_ang.to(self.device),
+                        sub_index.to(self.device),
+                    )
             else:
                 batch = batch_tuple
                 agni_raw = batch.agni.to(self.device)
