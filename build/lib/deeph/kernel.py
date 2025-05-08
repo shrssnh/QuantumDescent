@@ -94,6 +94,7 @@ class DeepHKernel:
         config.write(open(os.path.join(config.get('basic', 'save_dir'), 'config.ini'), "w"))
 
         self.if_lcmp = self.config.getboolean('network', 'if_lcmp', fallback=True)
+        self.if_agni = self.config.getboolean('network', 'if_agni', fallback=False)
         self.if_lcmp_graph = self.config.getboolean('graph', 'if_lcmp_graph', fallback=True)
         self.new_sp = self.config.getboolean('graph', 'new_sp', fallback=False)
         self.separate_onsite = self.config.getboolean('graph', 'separate_onsite', fallback=False)
@@ -665,17 +666,27 @@ class DeepHKernel:
                     sub_edge_idx.to(self.device),
                     sub_edge_ang.to(self.device),
                     sub_index.to(self.device),
-                    agni=batch.agni.to(self.device),
                 )
             else:
                 batch = batch_tuple
-                output = self.model(
-                    batch.x.to(self.device),
-                    batch.edge_index.to(self.device),
-                    batch.edge_attr.to(self.device),
-                    batch.batch.to(self.device),
-                    agni=batch.agni.to(self.device),
-                )
+                agni_raw = batch.agni.to(self.device)
+                feat_len = self.model.agni_lin.in_features
+                agni = agni_raw.view(-1, feat_len)
+                if self.if_agni:
+                    output = self.model(
+                        batch.x.to(self.device),
+                        batch.edge_index.to(self.device),
+                        batch.edge_attr.to(self.device),
+                        batch.batch.to(self.device),
+                        agni=batch.agni.to(self.device),
+                    )
+                else:
+                    output = self.model(
+                        batch.x.to(self.device),
+                        batch.edge_index.to(self.device),
+                        batch.edge_attr.to(self.device),
+                        batch.batch.to(self.device),
+                    )
             if self.target == 'E_ij':
                 if self.energy_component == 'E_ij':
                     label_non_onsite = batch.E_ij.to(self.device)
