@@ -664,7 +664,8 @@ class DeepHKernel:
                     sub_atom_idx.to(self.device),
                     sub_edge_idx.to(self.device),
                     sub_edge_ang.to(self.device),
-                    sub_index.to(self.device)
+                    sub_index.to(self.device),
+                    agni=batch.agni.to(self.device),
                 )
             else:
                 batch = batch_tuple
@@ -672,7 +673,8 @@ class DeepHKernel:
                     batch.x.to(self.device),
                     batch.edge_index.to(self.device),
                     batch.edge_attr.to(self.device),
-                    batch.batch.to(self.device)
+                    batch.batch.to(self.device),
+                    agni=batch.agni.to(self.device),
                 )
             if self.target == 'E_ij':
                 if self.energy_component == 'E_ij':
