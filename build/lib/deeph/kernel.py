@@ -689,6 +689,7 @@ class DeepHKernel:
                     agni_raw = batch.agni.to(self.device)
                     feat_len = self.model.agni_lin.in_features
                     agni = agni_raw.view(-1, feat_len)
+                    print("agni shape", agni.shape)
                     output = self.model(
                         batch.x.to(self.device),
                         batch.edge_index.to(self.device),
