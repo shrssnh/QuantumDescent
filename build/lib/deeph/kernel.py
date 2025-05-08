@@ -658,6 +658,9 @@ class DeepHKernel:
                 batch, subgraph = batch_tuple
                 sub_atom_idx, sub_edge_idx, sub_edge_ang, sub_index = subgraph
                 if self.if_agni:
+                    agni_raw = batch.agni.to(self.device)
+                    feat_len = self.model.agni_lin.in_features
+                    agni = agni_raw.view(-1, feat_len)
                     output = self.model(
                         batch.x.to(self.device),
                         batch.edge_index.to(self.device),
@@ -682,10 +685,10 @@ class DeepHKernel:
                     )
             else:
                 batch = batch_tuple
-                agni_raw = batch.agni.to(self.device)
-                feat_len = self.model.agni_lin.in_features
-                agni = agni_raw.view(-1, feat_len)
                 if self.if_agni:
+                    agni_raw = batch.agni.to(self.device)
+                    feat_len = self.model.agni_lin.in_features
+                    agni = agni_raw.view(-1, feat_len)
                     output = self.model(
                         batch.x.to(self.device),
                         batch.edge_index.to(self.device),
