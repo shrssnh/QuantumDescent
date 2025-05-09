@@ -611,12 +611,12 @@ class HGNN(nn.Module):
                  normalization, atom_update_net, separate_onsite,
                  trainable_gaussians, type_affine, num_l=5, use_transformer=False,
                  transformer_dim=None, transformer_heads=4, transformer_layers=1,
-                 common_GSA=False, if_MPAttention=False,):
+                 if_GSA=False, if_MPAttention=False,):
         super(HGNN, self).__init__()
         self.num_species = num_species
         self.embed = nn.Embedding(num_species + 5, in_atom_fea_len)
 
-        self.common_GSA = common_GSA
+        self.if_GSA = if_GSA
         self.if_MPAttention = if_MPAttention
         self.if_agni = if_agni
 
@@ -711,10 +711,7 @@ class HGNN(nn.Module):
                 num_layers=transformer_layers,
             )
         
-        if self.common_GSA:
-            # Need to implement flatten and unflatten
-            self.global_attention = GlobalSelfAttention(in_atom_fea_len + mp_output_edge_fea_len, in_atom_fea_len + mp_output_edge_fea_len, heads=4, dropout=0.1)
-        else:
+        if self.if_GSA:
             self.global_attention_atom = GlobalSelfAttention(in_atom_fea_len, in_atom_fea_len, heads=4, dropout=0.1)
             self.global_attention_edge = GlobalSelfAttention(mp_output_edge_fea_len, mp_output_edge_fea_len, heads=4, dropout=0.1)
 
@@ -779,9 +776,7 @@ class HGNN(nn.Module):
                 print("layer outputs", layer_outputs[0].shape, len(layer_outputs))
                 atom_fea = self.mp_attention(layer_outputs)
             # print(atom_fea.shape, edge_fea.shape, batch.shape)
-            if self.common_GSA:
-                atom_fea, edge_fea = self.global_attention(torch.cat((atom_fea, edge_fea), dim=1), batch)
-            else:
+            if self.if_GSA:
                 atom_fea, edge_fea = self.global_attention_atom(atom_fea, batch), self.global_attention_edge(edge_fea, batch)
             # print("yippee")
             
