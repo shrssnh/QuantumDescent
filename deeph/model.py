@@ -537,16 +537,89 @@ class MultipleLinear(nn.Module):
         return output
 
 
+class GlobalSelfAttention(nn.Module):
+    def __init__(self, in_features, out_features, heads=1, dropout=0.1):
+        super(GlobalSelfAttention, self).__init__()
+        self.heads = heads
+        self.out_features = out_features
+        self.query = nn.Linear(in_features, out_features * heads, bias=False)
+        self.key = nn.Linear(in_features, out_features * heads, bias=False)
+        self.value = nn.Linear(in_features, out_features * heads, bias=False)
+        self.fc_out = nn.Linear(out_features * heads, out_features)
+        self.dropout = nn.Dropout(dropout)
+        self.scale = (out_features // heads) ** -0.5
+
+    def forward(self, x, batch):
+        # Compute queries, keys, and values
+        Q = self.query(x)
+        K = self.key(x)
+        V = self.value(x)
+
+        # Reshape for multi-head attention
+        Q = Q.view(-1, self.heads, self.out_features)
+        K = K.view(-1, self.heads, self.out_features)
+        V = V.view(-1, self.heads, self.out_features)
+
+        # Compute attention scores
+        scores = torch.einsum("bhd,bhd->bh", Q, K) * self.scale
+        scores = scores.softmax(dim=-1)
+
+        # Apply attention to values
+        attended = torch.einsum("bh,bhd->bhd", scores, V)
+        attended = attended.view(-1, self.heads * self.out_features)
+
+        # Final linear transformation
+        out = self.fc_out(attended)
+        out = self.dropout(out)
+        return out
+
+
+class MessagePassingAttention(nn.Module):
+    def __init__(self, num_layers, feature_dim):
+        super(MessagePassingAttention, self).__init__()
+        self.attention_weights = nn.Parameter(torch.Tensor(num_layers, feature_dim))
+        self.softmax = nn.Softmax(dim=0)
+        self.reset_parameters()
+
+    def reset_parameters(self):
+        nn.init.xavier_uniform_(self.attention_weights)
+
+    def forward(self, layer_outputs):
+        """
+        Args:
+            layer_outputs (list of torch.Tensor): Outputs from each message-passing layer.
+                                                  Each tensor has shape (N, feature_dim).
+        Returns:
+            torch.Tensor: Weighted sum of the layer outputs, shape (N, feature_dim).
+        """
+        # Stack layer outputs into a single tensor of shape (num_layers, N, feature_dim)
+        stacked_outputs = torch.stack(layer_outputs, dim=0)  # Shape: (num_layers, N, feature_dim)
+
+        # Compute attention scores for each layer
+        print("shapes: ", self.attention_weights.shape, stacked_outputs.shape)
+        attention_scores = torch.einsum("ld,ld->l", self.attention_weights, stacked_outputs.mean(dim=1))
+        attention_scores = self.softmax(attention_scores)  # Shape: (num_layers,)
+
+        # Compute weighted sum of layer outputs
+        weighted_sum = torch.einsum("l,lnf->nf", attention_scores, stacked_outputs)
+        return weighted_sum
+
+
 class HGNN(nn.Module):
     def __init__(self, num_species, in_atom_fea_len, in_edge_fea_len, num_orbital,
                  distance_expansion, gauss_stop, if_exp, if_MultipleLinear, if_edge_update, if_agni, if_lcmp,
                  normalization, atom_update_net, separate_onsite,
                  trainable_gaussians, type_affine, num_l=5, use_transformer=False,
-                 transformer_dim=None, transformer_heads=4, transformer_layers=1):
+                 transformer_dim=None, transformer_heads=4, transformer_layers=1,
+                 common_GSA=False, if_MPAttention=False,):
         super(HGNN, self).__init__()
         self.num_species = num_species
         self.embed = nn.Embedding(num_species + 5, in_atom_fea_len)
+
+        self.common_GSA = common_GSA
+        self.if_MPAttention = if_MPAttention
         self.if_agni = if_agni
+
         if self.if_agni:
             self.agni_lin = nn.Linear(16, in_atom_fea_len)
 
@@ -637,12 +710,24 @@ class HGNN(nn.Module):
                 encoder_layer,
                 num_layers=transformer_layers,
             )
+        
+        if self.common_GSA:
+            # Need to implement flatten and unflatten
+            self.global_attention = GlobalSelfAttention(in_atom_fea_len + mp_output_edge_fea_len, in_atom_fea_len + mp_output_edge_fea_len, heads=4, dropout=0.1)
+        else:
+            self.global_attention_atom = GlobalSelfAttention(in_atom_fea_len, in_atom_fea_len, heads=4, dropout=0.1)
+            self.global_attention_edge = GlobalSelfAttention(mp_output_edge_fea_len, mp_output_edge_fea_len, heads=4, dropout=0.1)
+
+        if self.if_MPAttention:
+            self.mp_attention = MessagePassingAttention(num_layers=5, feature_dim=in_atom_fea_len)
+
 
     def forward(self, atom_attr, edge_idx, edge_attr, batch,
                 sub_atom_idx=None, sub_edge_idx=None, sub_edge_ang=None, sub_index=None,
                 huge_structure=False, output_final_layer_neuron='', agni=None):
         batch_edge = batch[edge_idx[0]]
         atom_fea0 = self.embed(atom_attr)
+        
         if self.if_agni:
             fpsize = self.agni_lin.in_features
             if agni.dim() == 1:
@@ -673,14 +758,33 @@ class HGNN(nn.Module):
             atom_fea0 = PaninnNodeFea(atom_fea0)
 
         if self.if_edge_update == True:
+            layer_outputs = []
             atom_fea, edge_fea = self.mp1(atom_fea0, edge_idx, edge_fea0, batch, distance, edge_vec)
+            if self.if_MPAttention:
+                layer_outputs.append(atom_fea)
             atom_fea, edge_fea = self.mp2(atom_fea, edge_idx, edge_fea, batch, distance, edge_vec)
+            if self.if_MPAttention:
+                layer_outputs.append(atom_fea)
             atom_fea0, edge_fea0 = atom_fea0 + atom_fea, edge_fea0 + edge_fea
             atom_fea, edge_fea = self.mp3(atom_fea0, edge_idx, edge_fea0, batch, distance, edge_vec)
+            if self.if_MPAttention:
+                layer_outputs.append(atom_fea)
             atom_fea, edge_fea = self.mp4(atom_fea, edge_idx, edge_fea, batch, distance, edge_vec)
+            if self.if_MPAttention:
+                layer_outputs.append(atom_fea)
             atom_fea0, edge_fea0 = atom_fea0 + atom_fea, edge_fea0 + edge_fea
             atom_fea, edge_fea = self.mp5(atom_fea0, edge_idx, edge_fea0, batch, distance, edge_vec)
-
+            if self.if_MPAttention:
+                layer_outputs.append(atom_fea)
+                print("layer outputs", layer_outputs[0].shape, len(layer_outputs))
+                atom_fea = self.mp_attention(layer_outputs)
+            # print(atom_fea.shape, edge_fea.shape, batch.shape)
+            if self.common_GSA:
+                atom_fea, edge_fea = self.global_attention(torch.cat((atom_fea, edge_fea), dim=1), batch)
+            else:
+                atom_fea, edge_fea = self.global_attention_atom(atom_fea, batch), self.global_attention_edge(edge_fea, batch)
+            # print("yippee")
+            
             if self.if_lcmp == True:
                 if self.atom_update_net == 'PAINN':
                     atom_fea_s = atom_fea.node_fea_s
