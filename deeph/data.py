@@ -155,6 +155,7 @@ raw_data_dir
         
         agni = torch.tensor(np.load(os.path.join(folder, 'unzipped/fingerprints.npy')).T, dtype=self.default_dtype_torch)
         data.agni = agni
+        #data.x = agni
 
         return data
 
