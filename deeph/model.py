@@ -644,9 +644,24 @@ class HGNN(nn.Module):
         batch_edge = batch[edge_idx[0]]
         atom_fea0 = self.embed(atom_attr)
         if self.if_agni:
+            fpsize = self.agni_lin.in_features
+            if agni.dim() == 1:
+                agni = agni.unsqueeze(0)              # → [1, total_len]
+            elif agni.dim() == 2 and agni.size(1) != fpsize:
+                pass
+            B, D = agni.shape
+            if D == fpsize:
+                n_sites = 1
+            elif D % fpsize == 0:
+                n_sites = D // fpsize
+            else:
+                raise ValueError(f"Cannot reshape AGNI of shape {agni.shape} into fpsize={fpsize}")
+
+            agni = agni.view(B, n_sites, fpsize)
             agni_pooled = agni.mean(dim=1)
-            agni_emb = self.agni_lin(agni)
+            agni_emb = self.agni_lin(agni_pooled)
             atom_fea0 = atom_fea0 * agni_emb
+    
         distance = edge_attr[:, 0]
         edge_vec = edge_attr[:, 1:4] - edge_attr[:, 4:7]
         if self.type_affine is None:
