@@ -644,6 +644,7 @@ class HGNN(nn.Module):
         batch_edge = batch[edge_idx[0]]
         atom_fea0 = self.embed(atom_attr)
         if self.if_agni:
+            agni_pooled = agni.mean(dim=1)
             agni_emb = self.agni_lin(agni)
             atom_fea0 = atom_fea0 * agni_emb
         distance = edge_attr[:, 0]
