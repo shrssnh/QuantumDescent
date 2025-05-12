@@ -155,6 +155,7 @@ raw_data_dir
         
         agni = torch.tensor(np.load(os.path.join(folder, 'unzipped/fingerprints.npy')).T, dtype=self.default_dtype_torch)
         data.agni = agni
+        #data.x = agni
 
         return data
 
@@ -166,9 +167,11 @@ raw_data_dir
             if (self.interface == 'h5' and 'rc.h5' in files) or (
                     self.interface == 'npz' and 'rc.npz' in files):
                 folder_list.append(root)
-        print("FOLDERS:", folder_list)
+        # print("FOLDERS:", folder_list)
         folder_list = sorted(folder_list)
         folder_list = folder_list[: self.nums]
+        if self.dataset_name == 'graphene_5':
+            folder_list = folder_list[::90]
         if self.dataset_name == 'graphene_150':
             folder_list = folder_list[::3]
         if self.dataset_name == 'graphene_450':

@@ -182,6 +182,8 @@ class DeepHKernel:
             trainable_gaussians=self.config.getboolean('network', 'trainable_gaussians', fallback=False),
             type_affine=self.config.getboolean('network', 'type_affine', fallback=False),
             if_fc_out=False,
+            if_GSA=self.config.getboolean('custom', 'if_GSA', fallback=False),
+            if_MPAttention=self.config.getboolean('custom', 'if_MPAttention', fallback=False),
         )
         parameter_list = list(signature(HGNN.__init__).parameters.keys())
         current_parameter_list = list(model_kwargs.keys())
